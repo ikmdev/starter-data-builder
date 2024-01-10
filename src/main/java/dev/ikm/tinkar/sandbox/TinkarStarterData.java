@@ -2885,6 +2885,67 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
 
+
+        starterData.concept(TinkarTerm.EXISTENTIAL_RESTRICTION)
+                .fullyQualifiedName("Existential Restriction (SOLOR)", TinkarTerm.EXISTENTIAL_RESTRICTION)
+                .synonym("Existential Restriction", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.EXISTENTIAL_RESTRICTION.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EXISTENTIAL_RESTRICTION.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.TRANSITIVE_FEATURE)
+                .fullyQualifiedName("Transitive Feature (SOLOR)", TinkarTerm.TRANSITIVE_FEATURE)
+                .synonym("Transitive Feature", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.TRANSITIVE_FEATURE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TRANSITIVE_FEATURE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.REFLEXIVE_FEATURE)
+                .fullyQualifiedName("Reflexive Feature (SOLOR)", TinkarTerm.REFLEXIVE_FEATURE)
+                .synonym("Reflexive Feature", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.REFLEXIVE_FEATURE.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFLEXIVE_FEATURE.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.LATERALITY)
+                .fullyQualifiedName("Laterality (SOLOR)", TinkarTerm.LATERALITY)
+                .synonym("Laterality", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.LATERALITY.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LATERALITY.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.HAS_ACTIVE_INGREDIENT)
+                .fullyQualifiedName("Has Active Ingredient (SOLOR)", TinkarTerm.HAS_ACTIVE_INGREDIENT)
+                .synonym("Has Active Ingredient", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.HAS_ACTIVE_INGREDIENT.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.HAS_ACTIVE_INGREDIENT.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
+        starterData.concept(TinkarTerm.HAS_DOSE_FORM)
+                .fullyQualifiedName("Has Dose Form (SOLOR)", TinkarTerm.HAS_DOSE_FORM)
+                .synonym("Has Dose Form", TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.HAS_DOSE_FORM.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.HAS_DOSE_FORM.asUuidArray()[0].toString())
+                .inferredNavigation(null, List.of(uncategorizedGrouper))
+                .statedNavigation(null, List.of(uncategorizedGrouper))
+                .statedDefinition(List.of(uncategorizedGrouper))
+                .build();
+
         //Create Description Pattern
         starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
                 .meaning(TinkarTerm.DESCRIPTION_SEMANTIC)
