@@ -132,6 +132,7 @@ public class TinkarStarterData {
                 .synonym("Acceptable (SOLOR)", TinkarTerm.PREFERRED)
                 .definition("defines whethere a value is allowable for a given field", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ACCEPTABLE.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(uncategorizedGrouper))
                 .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_ACCEPTABILITY))
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_ACCEPTABILITY))
                 .build();
@@ -1212,6 +1213,7 @@ public class TinkarStarterData {
                 .synonym("is-a stated navigation", TinkarTerm.PREFERRED)
                 .definition("designates the parent child relationship as authored", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IS_A_STATED_NAVIGATION.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.EXACT, TinkarTerm.PARTIAL), List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedNavigation(null, List.of(TinkarTerm.NAVIGATION_PATTERN))
                 .statedDefinition(List.of(TinkarTerm.NAVIGATION_PATTERN))
                 .build();
@@ -1600,7 +1602,7 @@ public class TinkarStarterData {
                 .synonym("Object", TinkarTerm.PREFERRED)
                 .definition("an encapsulation of data together with procedures", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.OBJECT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.STATUS_VALUE, TinkarTerm.DESCRIPTION, TinkarTerm.NID, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.SANDBOX_COMPONENT, TinkarTerm.MODULE, TinkarTerm.PATH, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATHS_PATTERN, TinkarTerm.OBJECT_PROPERTIES), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(TinkarTerm.STATUS_VALUE, TinkarTerm.DESCRIPTION, TinkarTerm.NID, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.SANDBOX_COMPONENT, TinkarTerm.MODULE, TinkarTerm.PATH, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATHS_PATTERN, TinkarTerm.OBJECT_PROPERTIES, TinkarTerm.DESCRIPTION_ACCEPTABILITY), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
 
