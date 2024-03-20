@@ -190,45 +190,6 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(authorizedSettings),List.of(lidrConcept))
                 .build();
 
-        //Component, Property, Time Aspect, Direct Site, Scale Type, Method, Units are concepts that
-        //will be brought over from the SNOMED-International dataset because LOINC Concepts used those
-        //Concepts to build out the SNOMED-LOINC concepts.
-
-
-
-
-        //Quantitative Data Results
-        EntityProxy.Concept quantDataResults = EntityProxy.Concept.make("Quantitative Data Results", uuidUtility.createUUID("Quantitative Data Results"));
-        starterData.concept(quantDataResults)
-                .fullyQualifiedName("Quantitative Data Results", TinkarTerm.PREFERRED)
-                .synonym("Quantitative", TinkarTerm.PREFERRED)
-                .definition("Indicates the test results using a quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, quantDataResults.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .build();
-
-        //Qualitative Data Results
-        EntityProxy.Concept qualDataResults = EntityProxy.Concept.make("Qualitative Data Results", uuidUtility.createUUID("Qualitative Data Results"));
-        starterData.concept(qualDataResults)
-                .fullyQualifiedName("Qualitative Data Results", TinkarTerm.PREFERRED)
-                .synonym("Qualitative", TinkarTerm.PREFERRED)
-                .definition("Indicates the test results using a qualitative measure.Used to deterimine how the test results were interpreted and communicated.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, qualDataResults.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .build();
-
-        //Data Results Type
-        List<EntityProxy.Concept> resultConcepts = Arrays.asList(qualDataResults,quantDataResults );
-        EntityProxy.Concept dataResultsType = EntityProxy.Concept.make("Data Results Type", uuidUtility.createUUID("Data Results Type"));
-        starterData.concept(dataResultsType)
-                .fullyQualifiedName("Data Results Type", TinkarTerm.PREFERRED)
-                .synonym("Results Type", TinkarTerm.PREFERRED)
-                .definition("Indicates the test results using a qualitative vs quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, dataResultsType.asUuidArray()[0].toString())
-                .statedDefinition(resultConcepts)
-                .statedNavigation(resultConcepts,List.of(dataResultsType))
-                .build();
-
         //Adding this for completeness - should be used instead of creating a new Analyte concept for LIDR
         //Analyte  - This should be the "Analyte measured" already in SNOMEDLOINC:  246478007 |Analyte measured (attribute)|
         EntityProxy.Concept snomedLoincAnalyte = EntityProxy.Concept.make("Analyte measured (attribute)", UuidUtil.fromSNOMED("246478007"));
@@ -240,8 +201,6 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(snomedLoincAnalyte))
                 .statedNavigation(List.of(snomedLoincAnalyte), List.of(lidrConcept))
                 .build();
-
-
 
 
         //TestKit UDI-DI
@@ -384,30 +343,6 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(testKitConcept),List.of(lidrConcept))
                 .build();
 
-        /* No UUID from SNOMED Browser -  'SNOMED has no concept for Result Conformance yet'  */
-        EntityProxy.Concept resultConformanceConcept = EntityProxy.Concept.make("Result Conformance", uuidUtility.createUUID("Result Conformance"));
-        starterData.concept(resultConformanceConcept)
-                .fullyQualifiedName("Result Conformance", TinkarTerm.PREFERRED)
-                .synonym("LIDR Result Conformance", TinkarTerm.PREFERRED)
-                .definition("Laboratory Interoperability Device Reference Result Conformance", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, resultConformanceConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept))
-                .statedNavigation(List.of(resultConformanceConcept),List.of(lidrConcept))
-                .build();
-
-        /* No UUID from SNOMED Browser -  'SNOMED has no concept for a simple Target yet - lots of hits on word Target'  */
-
-        /* UUID from SNOMED Browser - This is the ECL query : '246478007 |Analyte measured (attribute)|'  */
-        EntityProxy.Concept analyteConcept = EntityProxy.Concept.make("Analyte", uuidUtility.createUUID("Analyte"));
-        starterData.concept(analyteConcept)
-                .fullyQualifiedName("Analyte", TinkarTerm.PREFERRED)
-                .synonym("Analyte", TinkarTerm.PREFERRED)
-                .definition("What is specifically being measured by the test", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.IDENTIFIER_SOURCE, analyteConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept,dataResultsType))
-                .statedNavigation(List.of(dataResultsType),List.of(lidrConcept))
-                .build();
-
         //Vendor Code/Description Pattern
         EntityProxy.Concept vendorCodeDescriptionPattern = EntityProxy.Concept.make("Vendor Code/Description Pattern", uuidUtility.createUUID("Vendor Code/Description Pattern"));
         starterData.concept(vendorCodeDescriptionPattern)
@@ -419,11 +354,79 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(vendorCode,vendorDescription,vendorOrDecriptionTypeConcept
                 ),List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
-
+        
+        configureResultConformanceAndAnalyteConcepts(starterData, uuidUtility, lidrConcept);
         configureLidrSpecimenConcept(starterData, uuidUtility, lidrConcept);
         configureAnalyteAndResultConformancePatterns(starterData, uuidUtility, lidrPatternConcept);
         configureLIDR_MetaDataPattern(starterData, uuidUtility, lidrPatternConcept);
         configurePhenomenonNavigation(starterData, uuidUtility);
+
+    }
+
+    private static void configureResultConformanceAndAnalyteConcepts(StarterData starterData, UUIDUtility uuidUtility, EntityProxy.Concept lidrConcept) {
+
+        /* UUID from SNOMED Browser - This is the ECL query : '246478007 |Analyte measured (attribute)|'  */
+        EntityProxy.Concept analyteConcept = EntityProxy.Concept.make("Analyte", uuidUtility.createUUID("Analyte"));
+        starterData.concept(analyteConcept)
+                .fullyQualifiedName("Analyte", TinkarTerm.PREFERRED)
+                .synonym("Analyte", TinkarTerm.PREFERRED)
+                .definition("What is specifically being measured by the test", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.IDENTIFIER_SOURCE, analyteConcept.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT, lidrConcept))
+                .build();
+
+        /* No UUID from SNOMED Browser -  'SNOMED has no concept for Result Conformance yet'  */
+        EntityProxy.Concept resultConformanceConcept = EntityProxy.Concept.make("Result Conformance", uuidUtility.createUUID("Result Conformance"));
+        starterData.concept(resultConformanceConcept)
+                .fullyQualifiedName("Result Conformance", TinkarTerm.PREFERRED)
+                .synonym("LIDR Result Conformance", TinkarTerm.PREFERRED)
+                .definition("Laboratory Interoperability Device Reference Result Conformance", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, resultConformanceConcept.asUuidArray()[0].toString())
+                .statedDefinition(List.of(lidrConcept,TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        //Quantitative Data Results
+        EntityProxy.Concept quantDataResults = EntityProxy.Concept.make("Quantitative Data Results", uuidUtility.createUUID("Quantitative Data Results"));
+        starterData.concept(quantDataResults)
+                .fullyQualifiedName("Quantitative Data Results", TinkarTerm.PREFERRED)
+                .synonym("Quantitative", TinkarTerm.PREFERRED)
+                .definition("Indicates the test results using a quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, quantDataResults.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .build();
+
+        //Qualitative Data Results
+        EntityProxy.Concept qualDataResults = EntityProxy.Concept.make("Qualitative Data Results", uuidUtility.createUUID("Qualitative Data Results"));
+        starterData.concept(qualDataResults)
+                .fullyQualifiedName("Qualitative Data Results", TinkarTerm.PREFERRED)
+                .synonym("Qualitative", TinkarTerm.PREFERRED)
+                .definition("Indicates the test results using a qualitative measure.Used to deterimine how the test results were interpreted and communicated.", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, qualDataResults.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
+                .build();
+
+        //Data Results Type
+        List<EntityProxy.Concept> resultConcepts = Arrays.asList(lidrConcept,analyteConcept,
+                resultConformanceConcept, qualDataResults,quantDataResults );
+
+        EntityProxy.Concept dataResultsType = EntityProxy.Concept.make("Data Results Type", uuidUtility.createUUID("Data Results Type"));
+        starterData.concept(dataResultsType)
+                .fullyQualifiedName("Data Results Type", TinkarTerm.PREFERRED)
+                .synonym("Results Type", TinkarTerm.PREFERRED)
+                .definition("Indicates the test results using a qualitative vs quantitative measure.", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, dataResultsType.asUuidArray()[0].toString())
+                .statedDefinition(resultConcepts)
+                .statedNavigation(resultConcepts,List.of( lidrConcept,TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        starterData.concept(analyteConcept)
+                .statedNavigation(List.of(dataResultsType),List.of(lidrConcept,TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        starterData.concept(resultConformanceConcept)
+                .statedNavigation(List.of(dataResultsType),List.of(lidrConcept,TinkarTerm.MODEL_CONCEPT))
+                .build();
+
 
     }
 
