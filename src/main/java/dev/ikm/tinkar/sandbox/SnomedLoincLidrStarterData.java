@@ -485,27 +485,13 @@ public class SnomedLoincLidrStarterData {
                 ),List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        //Reference Ranges
-        EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", uuidUtility.createUUID("Reference Ranges"));
-        starterData.concept(referenceRanges)
-                .fullyQualifiedName("Reference Ranges", TinkarTerm.PREFERRED)
-                .synonym("Range of Values", TinkarTerm.PREFERRED)
-                .definition("A range of normal values expected for a healthy person based on a group of otherwise healthy people", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, referenceRanges.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .build();
+        configureAnalyteAndResultConformancePatterns(starterData, uuidUtility, lidrPatternConcept);
+        configureLIDR_MetaDataPattern(starterData, uuidUtility, lidrPatternConcept);
+        configurePhenomenonNavigation(starterData, uuidUtility);
 
-        //Detection Limit
-        EntityProxy.Concept detectionLimit = EntityProxy.Concept.make("Detection Limit", uuidUtility.createUUID("Detection Limit"));
-        starterData.concept(detectionLimit)
-                .fullyQualifiedName("Detection Limit", TinkarTerm.PREFERRED)
-                .synonym("Limit of Detection (LOD)", TinkarTerm.PREFERRED)
-                .definition("The limit of detection LOD (or detection limit, DL) is the lowest possible concentration at which the method can detect (but not quantify!) the analyte within the matrix with certain degree of confidence.", TinkarTerm.DESCRIPTION_TYPE)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, detectionLimit.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-                .build();
+    }
 
-
+    private static void configureAnalyteAndResultConformancePatterns(StarterData starterData, UUIDUtility uuidUtility, EntityProxy.Concept lidrPatternConcept) {
         //Result Conformance Range Pattern
         EntityProxy.Concept resultConformanceRangePattern = EntityProxy.Concept.make("Result Conformance Range Pattern", uuidUtility.createUUID("Result Conformance Range Pattern"));
         starterData.concept(resultConformanceRangePattern)
@@ -513,8 +499,7 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Result Conformance Range Pattern", TinkarTerm.PREFERRED)
                 .definition("A Pattern that specifies the Result Ranges for the Result Conformance", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.IDENTIFIER_SOURCE, resultConformanceRangePattern.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .statedNavigation(List.of(referenceRanges),List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrPatternConcept))
                 .build();
 
         //Analyte Range Pattern
@@ -524,13 +509,39 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Analyte Range Pattern", TinkarTerm.PREFERRED)
                 .definition("A Pattern that specifies the Result Ranges and Detection Limit for the Analyte", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.IDENTIFIER_SOURCE, analyteRangePattern.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .statedNavigation(List.of(referenceRanges,detectionLimit),List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrPatternConcept))
                 .build();
 
+        //Reference Ranges
+        EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", uuidUtility.createUUID("Reference Ranges"));
+        starterData.concept(referenceRanges)
+                .fullyQualifiedName("Reference Ranges", TinkarTerm.PREFERRED)
+                .synonym("Range of Values", TinkarTerm.PREFERRED)
+                .definition("A range of normal values expected for a healthy person based on a group of otherwise healthy people", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, referenceRanges.asUuidArray()[0].toString())
+                .statedDefinition(List.of(resultConformanceRangePattern,analyteRangePattern))
+                .statedNavigation(List.of(referenceRanges),List.of(resultConformanceRangePattern,analyteRangePattern))
+                .build();
 
-        configureLIDR_MetaDataPattern(starterData, uuidUtility, lidrPatternConcept);
-        configurePhenomenonNavigation(starterData, uuidUtility);
+        //Detection Limit
+        EntityProxy.Concept detectionLimit = EntityProxy.Concept.make("Detection Limit", uuidUtility.createUUID("Detection Limit"));
+        starterData.concept(detectionLimit)
+                .fullyQualifiedName("Detection Limit", TinkarTerm.PREFERRED)
+                .synonym("Limit of Detection (LOD)", TinkarTerm.PREFERRED)
+                .definition("The limit of detection LOD (or detection limit, DL) is the lowest possible concentration at which the method can detect (but not quantify!) the analyte within the matrix with certain degree of confidence.", TinkarTerm.DESCRIPTION_TYPE)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, detectionLimit.asUuidArray()[0].toString())
+                .statedDefinition(List.of(analyteRangePattern))
+                .statedNavigation(List.of(detectionLimit), List.of(analyteRangePattern))
+                .build();
+
+        starterData.concept(resultConformanceRangePattern)
+                .statedNavigation(List.of(lidrPatternConcept,referenceRanges),List.of(lidrPatternConcept))
+                .build();
+
+        starterData.concept(analyteRangePattern)
+                .statedNavigation(List.of(lidrPatternConcept,referenceRanges,detectionLimit),List.of(lidrPatternConcept))
+                .build();
+
 
     }
 
