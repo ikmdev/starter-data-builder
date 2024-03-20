@@ -70,6 +70,16 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.USER))
                 .build();
 
+        EntityProxy.Concept lidrPatternConcept = EntityProxy.Concept.make("PATTERN", uuidUtility.createUUID("FDA LIDR PATTERN Concept"));
+        starterData.concept(lidrPatternConcept)
+                .fullyQualifiedName("FDA LIDR PATTERN", TinkarTerm.PREFERRED)
+                .synonym("Pattern", TinkarTerm.PREFERRED)
+                .definition("A Pattern in the LIDR System", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, lidrPatternConcept.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(lidrPatternConcept),List.of(TinkarTerm.ROOT_VERTEX))
+                .build();
+
         /* UUID from SNOMED Browser - This is the ECL query : '705114005 |LOINC Code System (qualifier value)|'  */
         EntityProxy.Concept loincIdentifier = EntityProxy.Concept.make("LOINC Number", UuidUtil.fromSNOMED("705114005"));
         starterData.concept(loincIdentifier)
@@ -519,12 +529,12 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
 
-        configureLIDR_MetaDataPattern(starterData, uuidUtility);
+        configureLIDR_MetaDataPattern(starterData, uuidUtility, lidrPatternConcept);
         configurePhenomenonNavigation(starterData, uuidUtility);
 
     }
 
-    private static void configureLIDR_MetaDataPattern(StarterData starterData, UUIDUtility uuidUtility) {
+    private static void configureLIDR_MetaDataPattern(StarterData starterData, UUIDUtility uuidUtility, EntityProxy.Concept lidrPatternConcept) {
 
         EntityProxy.Concept lidrMetadataPattern = EntityProxy.Concept.make("LIDR MetaData Pattern", uuidUtility.createUUID("LIDR MetaData Pattern"));
         starterData.concept(lidrMetadataPattern)
@@ -532,7 +542,7 @@ public class SnomedLoincLidrStarterData {
                 .synonym("LIDR MetaData Pattern", TinkarTerm.PREFERRED)
                 .definition("A Pattern that contains semantic values to describe LOINC Values assigned and reviewed by the LIDR Comittee and a Vendor", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.IDENTIFIER_SOURCE, lidrMetadataPattern.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrPatternConcept))
                 .build();
 
         //LOINC Version ID
@@ -542,8 +552,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("LOINC Version ID", TinkarTerm.PREFERRED)
                 .definition("The version of LOINC used to establish the LOINC mapping for the described test", TinkarTerm.SOURCE_CONTENT_VERSION)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincVersionID.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(loincVersionID),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(loincVersionID),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
         //Date Mapping Performed
@@ -553,8 +563,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Date Mapping Performed", TinkarTerm.PREFERRED)
                 .definition("Date the LOINC mapping was performed - this will help understand the temporal context and if review is needed with a new LOINC release", TinkarTerm.SOURCE_RELEASE_DATE)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, dateMappingPerformed.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(dateMappingPerformed),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(dateMappingPerformed),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
         //Source of Entry
@@ -564,8 +574,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Source of Entry", TinkarTerm.PREFERRED)
                 .definition("Name of the organization that submitted the data for the LIDR Record", TinkarTerm.NAME)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, sourceOfEntry.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(sourceOfEntry),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(sourceOfEntry),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
         EntityProxy.Concept committeeReviewed = EntityProxy.Concept.make("Committee Reviewed", uuidUtility.createUUID("Committee Reviewed"));
@@ -574,8 +584,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Committee Reviewed", TinkarTerm.PREFERRED)
                 .definition("Lists the name of the committee who reviewed the data in this row for accuracy in representing the package insert content and the LOINC (and other standard code) mapping Considered NOT REVIEWED when blank For now should only be \"LIDR\"", TinkarTerm.NAME)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, committeeReviewed.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(committeeReviewed),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(committeeReviewed),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
         //Vendor Reviewed
@@ -587,8 +597,8 @@ public class SnomedLoincLidrStarterData {
                         " Should match the name listed in Manufacturer\n" +
                         " Considered NOT REVIEWED when blank\"", TinkarTerm.NAME)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, vendorReviewed.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(vendorReviewed),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(vendorReviewed),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
 
@@ -599,8 +609,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Vendor Comment", TinkarTerm.PREFERRED)
                 .definition("A human-readable text clarification about the test being performed", TinkarTerm.DESCRIPTION_TYPE)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, vendorComment.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(vendorComment),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(vendorComment),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
         //Test Ordered
@@ -610,8 +620,8 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Test Ordered analyte/observable (LOINC ®™)", TinkarTerm.PREFERRED)
                 .definition("Provides the specific test that was ordered for machine interpretation and can be checked against the test that was performed.", TinkarTerm.IDENTIFIER_SOURCE)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, testOrdered.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(testOrdered),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(testOrdered),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
         //Test Performed
@@ -621,12 +631,12 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Test Performed analyte/observable (LOINC ®™)", TinkarTerm.PREFERRED)
                 .definition("Provides the specific test that was performed for machine interpretation and can be checked against the test that was ordered.", TinkarTerm.IDENTIFIER_SOURCE)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, testPerformed.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrMetadataPattern))
-                .statedNavigation(List.of(testPerformed),List.of(lidrMetadataPattern,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrMetadataPattern,lidrPatternConcept))
+                .statedNavigation(List.of(testPerformed),List.of(lidrMetadataPattern,lidrPatternConcept))
                 .build();
 
         //LIDR MetaData Pattern
-        List<EntityProxy.Concept> metaDataConcepts = Arrays.asList(TinkarTerm.MODEL_CONCEPT,
+        List<EntityProxy.Concept> metaDataConcepts = Arrays.asList(lidrPatternConcept,lidrPatternConcept,
                 testOrdered,
                 testPerformed,dateMappingPerformed,
                 loincVersionID,sourceOfEntry,
@@ -634,7 +644,7 @@ public class SnomedLoincLidrStarterData {
                 vendorComment);
 
         starterData.concept(lidrMetadataPattern)
-                .statedNavigation(metaDataConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(metaDataConcepts,List.of(lidrPatternConcept))
                 .build();
     }
 
