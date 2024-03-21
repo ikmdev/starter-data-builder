@@ -443,7 +443,7 @@ public class SnomedLoincLidrStarterData {
                 .synonym("LIDR Specimen", TinkarTerm.PREFERRED)
                 .definition("Laboratory Interoperability Device Reference Result Specimen", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, lidrSpecimenConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept,TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(lidrConcept))
                 .build();
 
         //In SNOMED-LOINC now: 371439000 |Specimen type (observable entity)| will be the source for below as per spreadsheet LIDRStarterData:
@@ -455,7 +455,7 @@ public class SnomedLoincLidrStarterData {
                 .definition("\"From HL7: This field describes the precise nature of the entity that will be the source material for the observation.\n" +
                         "This entry describes the specimen type, i.e. the \"\"what\"\" is being submitted\n", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedSpecimenConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept))
+                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept,snomedSpecimenConcept))
                 .statedNavigation( List.of(snomedSpecimenConcept) ,List.of(lidrConcept, lidrSpecimenConcept))
                 .build();
 
@@ -466,7 +466,7 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Specimen Type Modifier", TinkarTerm.PREFERRED)
                 .definition("A modifying or qualifying description(s) about the specimen type", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenTypeModConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept))
+                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept,specimenTypeModConcept))
                 .statedNavigation( List.of(specimenTypeModConcept) ,List.of(lidrConcept, lidrSpecimenConcept))
                 .build();
 
@@ -477,7 +477,7 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Specimen source site (SNOMED CT®)", TinkarTerm.PREFERRED)
                 .definition("The source from which the specimen was obtained and describes where the specimen came from, i.e. the \"\"where\"\"", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenSourceSiteConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept))
+                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept,specimenSourceSiteConcept))
                 .statedNavigation( List.of(specimenSourceSiteConcept) ,List.of(lidrConcept, lidrSpecimenConcept))
                 .build();
 
@@ -488,7 +488,7 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Specimen collection method (SNOMED CT®)", TinkarTerm.PREFERRED)
                 .definition("The procedure or process by which the specimen was collected.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenCollectionMethodConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept))
+                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept,specimenCollectionMethodConcept))
                 .statedNavigation( List.of(specimenCollectionMethodConcept) ,List.of(lidrConcept, lidrSpecimenConcept))
                 .build();
 
@@ -499,12 +499,12 @@ public class SnomedLoincLidrStarterData {
                 .synonym("Specimen additives (SNOMED CT®)", TinkarTerm.PREFERRED)
                 .definition("Specifies the actual additives used during the preparation of the specimen when performing the test.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenAdditivesConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept))
+                .statedDefinition(List.of(lidrConcept, lidrSpecimenConcept,specimenAdditivesConcept))
                 .statedNavigation( List.of(specimenAdditivesConcept) ,List.of(lidrConcept, lidrSpecimenConcept))
                 .build();
 
         List<EntityProxy.Concept> specimenConcepts = List.of(TinkarTerm.MODEL_CONCEPT,
-                lidrConcept,lidrSpecimenConcept,
+                lidrConcept,lidrSpecimenConcept,  // These parent concepts need to be here to see desired hierarchy
                 snomedSpecimenConcept,specimenAdditivesConcept,
                 specimenSourceSiteConcept,specimenCollectionMethodConcept,
                 specimenTypeModConcept );
