@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 public class SnomedLoincLidrStarterData {
@@ -42,7 +43,7 @@ public class SnomedLoincLidrStarterData {
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
-        EntityProxy.Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier Source", UuidUtil.fromSNOMED("900000000000294009"));
+        EntityProxy.Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier Source", UUID.nameUUIDFromBytes("900000000000294009".getBytes()));
         starterData.concept(snomedIdentifier)
                 .fullyQualifiedName("SNOMED CT integer identifier", TinkarTerm.PREFERRED)
                 .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
@@ -71,7 +72,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         /* UUID from SNOMED Browser - This is the ECL query : '705114005 |LOINC Code System (qualifier value)|'  */
-        EntityProxy.Concept loincIdentifier = EntityProxy.Concept.make("LOINC Number", UuidUtil.fromSNOMED("705114005"));
+        EntityProxy.Concept loincIdentifier = EntityProxy.Concept.make("LOINC Number", UUID.nameUUIDFromBytes("705114005".getBytes()));
         starterData.concept(loincIdentifier)
                 .fullyQualifiedName("LOINC Number", TinkarTerm.PREFERRED)
                 .synonym("LOINC Num", TinkarTerm.PREFERRED)
@@ -221,7 +222,7 @@ public class SnomedLoincLidrStarterData {
 
         //Adding this for completeness - should be used instead of creating a new Analyte concept for LIDR
         //Analyte  - This should be the "Analyte measured" already in SNOMEDLOINC:  246478007 |Analyte measured (attribute)|
-        EntityProxy.Concept snomedLoincAnalyte = EntityProxy.Concept.make("Analyte measured (attribute)", UuidUtil.fromSNOMED("246478007"));
+        EntityProxy.Concept snomedLoincAnalyte = EntityProxy.Concept.make("Analyte measured (attribute)", UUID.nameUUIDFromBytes("246478007".getBytes()));
         starterData.concept(snomedLoincAnalyte)
                 .fullyQualifiedName("Analyte measured (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Analyte measured", TinkarTerm.PREFERRED)
@@ -233,7 +234,7 @@ public class SnomedLoincLidrStarterData {
 
         //In SNOMED-LOINC now: 371439000 |Specimen type (observable entity)| will be the source for below as per spreadsheet LIDRStarterData:
         //Specimen Type
-        EntityProxy.Concept specimenConcept = EntityProxy.Concept.make("Specimen Type", UuidUtil.fromSNOMED("371439000"));
+        EntityProxy.Concept specimenConcept = EntityProxy.Concept.make("Specimen Type", UUID.nameUUIDFromBytes("371439000".getBytes()));
         starterData.concept(specimenConcept)
                 .fullyQualifiedName("Specimen Type", TinkarTerm.PREFERRED)
                 .synonym("Specimen type (SNOMED CT®) at minimum",TinkarTerm.DESCRIPTION_TYPE)
@@ -407,7 +408,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         /* UUID from SNOMED Browser - This is the ECL query : '57134006 |Instrument, device (physical object)|'  */
-        EntityProxy.Concept instrumentIdentifier = EntityProxy.Concept.make("Device", UuidUtil.fromSNOMED("57134006"));
+        EntityProxy.Concept instrumentIdentifier = EntityProxy.Concept.make("Device", UUID.nameUUIDFromBytes("57134006".getBytes()));
         starterData.concept(instrumentIdentifier)
                 .fullyQualifiedName("Instrument, device (physical object)", TinkarTerm.PREFERRED)
                 .synonym("Clinical instrument", TinkarTerm.PREFERRED)
@@ -419,7 +420,7 @@ public class SnomedLoincLidrStarterData {
 
         /* UUID from SNOMED Browser - This is the ECL query : '43222004 |Test kit method (procedure)|'  */
         // Maybe take this out since it is not just plain "Test kit".
-        EntityProxy.Concept testKitMethodIdentifier = EntityProxy.Concept.make("Test kit method", UuidUtil.fromSNOMED("43222004"));
+        EntityProxy.Concept testKitMethodIdentifier = EntityProxy.Concept.make("Test kit method", UUID.nameUUIDFromBytes("43222004".getBytes()));
         starterData.concept(testKitMethodIdentifier)
                 .fullyQualifiedName("Test kit method (procedure)", TinkarTerm.PREFERRED)
                 .synonym("Test kit method", TinkarTerm.PREFERRED)
@@ -652,7 +653,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Component   From SNOMED-LOINC : 246093002  |Component (attribute)|
-        EntityProxy.Concept loincComponent = EntityProxy.Concept.make("Component", UuidUtil.fromSNOMED("246093002"));
+        EntityProxy.Concept loincComponent = EntityProxy.Concept.make("Component", UUID.nameUUIDFromBytes("246093002".getBytes()));
         starterData.concept(loincComponent)
                 .fullyQualifiedName("Component (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Component", TinkarTerm.PREFERRED)
@@ -663,7 +664,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Property   From SNOMED-LOINC : 370130000 |Property (attribute)|
-        EntityProxy.Concept loincProperty = EntityProxy.Concept.make("Property", UuidUtil.fromSNOMED("370130000"));
+        EntityProxy.Concept loincProperty = EntityProxy.Concept.make("Property", UUID.nameUUIDFromBytes("370130000".getBytes()));
         starterData.concept(loincProperty)
                 .fullyQualifiedName("Property (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Property", TinkarTerm.PREFERRED)
@@ -674,7 +675,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Time Aspect   From SNOMED-LOINC : 370134009 |Time aspect (attribute)|
-        EntityProxy.Concept loincTimeAspect = EntityProxy.Concept.make("Time aspect", UuidUtil.fromSNOMED("370134009"));
+        EntityProxy.Concept loincTimeAspect = EntityProxy.Concept.make("Time aspect", UUID.nameUUIDFromBytes("370134009".getBytes()));
         starterData.concept(loincTimeAspect)
                 .fullyQualifiedName("Time aspect (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Time aspect", TinkarTerm.PREFERRED)
@@ -685,7 +686,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Direct site   From SNOMED-LOINC : 704327008 |Direct site (attribute)|
-        EntityProxy.Concept loincDirectSite = EntityProxy.Concept.make("Direct site", UuidUtil.fromSNOMED("704327008"));
+        EntityProxy.Concept loincDirectSite = EntityProxy.Concept.make("Direct site", UUID.nameUUIDFromBytes("704327008".getBytes()));
         starterData.concept(loincDirectSite)
                 .fullyQualifiedName("Direct site (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Direct site", TinkarTerm.PREFERRED)
@@ -696,7 +697,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Scale type   From SNOMED-LOINC : 370132008 |Scale type (attribute)|
-        EntityProxy.Concept loincScaleType = EntityProxy.Concept.make("Scale type", UuidUtil.fromSNOMED("370132008"));
+        EntityProxy.Concept loincScaleType = EntityProxy.Concept.make("Scale type", UUID.nameUUIDFromBytes("370132008".getBytes()));
         starterData.concept(loincScaleType)
                 .fullyQualifiedName("Scale type (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Scale type", TinkarTerm.PREFERRED)
@@ -707,7 +708,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Method From SNOMED-LOINC :  From SNOMED-LOINC : 260686004 |Method (attribute)|
-        EntityProxy.Concept methodType = EntityProxy.Concept.make("Method", UuidUtil.fromSNOMED("260686004"));
+        EntityProxy.Concept methodType = EntityProxy.Concept.make("Method", UUID.nameUUIDFromBytes("260686004".getBytes()));
         starterData.concept(methodType)
                 .fullyQualifiedName("Method (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Method", TinkarTerm.PREFERRED)
@@ -718,7 +719,7 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Units from SNOMED-LOINC :  From SNOMED-LOINC : 246514001 |Units (attribute)|
-        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UuidUtil.fromSNOMED("246514001"));
+        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UUID.nameUUIDFromBytes("246514001".getBytes()));
         starterData.concept(loincUnitsType)
                 .fullyQualifiedName("Units (attribute)", TinkarTerm.PREFERRED)
                 .synonym("Units", TinkarTerm.PREFERRED)

@@ -10,6 +10,7 @@ import dev.ikm.tinkar.terms.TinkarTerm;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 public class SnomedStarterData {
@@ -46,7 +47,7 @@ public class SnomedStarterData {
                 .statedDefinition(List.of(TinkarTerm.USER))
                 .build();
 
-        Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UuidUtil.fromSNOMED("900000000000294009"));
+        Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UUID.nameUUIDFromBytes("900000000000294009".getBytes()));
         starterData.concept(snomedIdentifier)
                 .fullyQualifiedName("SNOMED CT Identifier", TinkarTerm.PREFERRED)
                 .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
