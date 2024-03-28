@@ -47,7 +47,7 @@ public class SnomedStarterData {
                 .statedDefinition(List.of(TinkarTerm.USER))
                 .build();
 
-        Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UUID.nameUUIDFromBytes("900000000000294009".getBytes()));
+        Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UUID.nameUUIDFromBytes( ("org.snomed. 900000000000294009").getBytes()));
         starterData.concept(snomedIdentifier)
                 .fullyQualifiedName("SNOMED CT Identifier", TinkarTerm.PREFERRED)
                 .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
