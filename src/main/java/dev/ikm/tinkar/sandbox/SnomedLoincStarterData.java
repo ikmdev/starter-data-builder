@@ -44,7 +44,7 @@ public class SnomedLoincStarterData {
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
 
-        EntityProxy.Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UUID.nameUUIDFromBytes( ("org.snomed. 900000000000294009").getBytes()));
+        EntityProxy.Concept snomedIdentifier = EntityProxy.Concept.make("SNOMED CT Identifier", UUID.nameUUIDFromBytes( ("org.snomed.900000000000294009").getBytes()));
         starterData.concept(snomedIdentifier)
                 .fullyQualifiedName("SNOMED CT integer identifier", TinkarTerm.PREFERRED)
                 .synonym("SNOMED CT ID", TinkarTerm.PREFERRED)
@@ -73,7 +73,7 @@ public class SnomedLoincStarterData {
                 .build();
 
         /* UUID from SNOMED Browser - This is the ECL query : '705114005 |LOINC Code System (qualifier value)|'  */
-        EntityProxy.Concept loincIdentifier = EntityProxy.Concept.make("LOINC Number", UUID.nameUUIDFromBytes( ("org.snomed. 705114005").getBytes()));
+        EntityProxy.Concept loincIdentifier = EntityProxy.Concept.make("LOINC Number", UUID.nameUUIDFromBytes( ("org.snomed.705114005").getBytes()));
         starterData.concept(loincIdentifier)
                 .fullyQualifiedName("LOINC Number", TinkarTerm.PREFERRED)
                 .synonym("LOINC Num", TinkarTerm.PREFERRED)
