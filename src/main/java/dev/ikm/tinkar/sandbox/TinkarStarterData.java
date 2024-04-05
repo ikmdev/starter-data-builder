@@ -70,7 +70,18 @@ public class TinkarStarterData {
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
+        Concept axiomSyntax = Concept.make("Axiom Syntax", uuidUtility.createUUID("Axiom Syntax"));
+        Concept dialect = Concept.make("Dialect", uuidUtility.createUUID("Dialect"));
+        Concept englishDialect = Concept.make("English dialect", uuidUtility.createUUID("English dialect"));
+        Concept expressAxiom = Concept.make("Express axiom syntax", uuidUtility.createUUID("Express axiom syntax"));
+        Concept identifierPattern = Concept.make("Identifier pattern", uuidUtility.createUUID("Identifier pattern"));
+        Concept languageForDescription = Concept.make("Language for description", uuidUtility.createUUID("Language for description"));
+        Concept pattern = Concept.make("Pattern", uuidUtility.createUUID("Pattern"));
+        Concept roleRestriction = Concept.make("Role restriction", uuidUtility.createUUID("Role restriction"));
+        Concept starterDataAuthoring = EntityProxy.Concept.make("Starter Data Authoring", uuidUtility.createUUID());
+        Concept textComparison = EntityProxy.Concept.make("TEXT_COMPARISON", UUID.randomUUID());
         Concept uncategorizedGrouper = EntityProxy.Concept.make("UNCATEGORIZED_GROUPER", uuidUtility.createUUID());
+
         starterData.concept(uncategorizedGrouper)
                 .fullyQualifiedName("UNCATEGORIZED_GROUPER", TinkarTerm.PREFERRED)
                 .synonym("UNCATEGORIZED_GROUPER", TinkarTerm.PREFERRED)
@@ -80,17 +91,15 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
 
-        Concept englishDialect = EntityProxy.Concept.make("ENGLISH_DIALECT", UUID.randomUUID());
         starterData.concept(englishDialect)
-                .fullyQualifiedName("English Dialect (SOLOR)", TinkarTerm.PREFERRED)
+                .fullyQualifiedName("English Dialect", TinkarTerm.PREFERRED)
                 .synonym("English dialect", TinkarTerm.PREFERRED)
-                .definition("Dialect/ grouping", TinkarTerm.PREFERRED)
+                .definition("Specifies the dialect of the English language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, englishDialect.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.US_ENGLISH_DIALECT), List.of(TinkarTerm.DIALECT_ASSEMBLAGE))
-                .statedDefinition(List.of(TinkarTerm.DIALECT_ASSEMBLAGE))
+                .statedNavigation(List.of(TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.US_ENGLISH_DIALECT), List.of(dialect))
+                .statedDefinition(List.of(dialect))
                 .build();
 
-        Concept textComparison = EntityProxy.Concept.make("TEXT_COMPARISON", UUID.randomUUID());
         starterData.concept(textComparison)
                 .fullyQualifiedName("Text comparison measure semantic (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Text comparsion", TinkarTerm.PREFERRED)
@@ -100,7 +109,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.MEANING))
                 .build();
 
-        Concept starterDataAuthoring = EntityProxy.Concept.make("Starter Data Authoring", uuidUtility.createUUID());
         starterData.concept(starterDataAuthoring)
                 .fullyQualifiedName(starterDataAuthoring.description(), TinkarTerm.PREFERRED)
                 .synonym("Metadata Authoring", TinkarTerm.ACCEPTABLE)
@@ -109,7 +117,7 @@ public class TinkarStarterData {
                 .statedNavigation(null, List.of(uncategorizedGrouper))
                 .build();
 
-        Concept axiomSyntax = Concept.make("Axiom Syntax", uuidUtility.createUUID("Axiom Syntax"));
+
         starterData.concept(axiomSyntax)
                 .fullyQualifiedName(axiomSyntax.description(), TinkarTerm.PREFERRED)
                 .synonym("Axiom Syntax", TinkarTerm.ACCEPTABLE)
@@ -118,7 +126,6 @@ public class TinkarStarterData {
                 .statedNavigation(null, List.of(uncategorizedGrouper))
                 .build();
 
-        Concept expressAxiom = Concept.make("Express axiom syntax", uuidUtility.createUUID("Express axiom syntax"));
         starterData.concept(expressAxiom)
                 .fullyQualifiedName(expressAxiom.description(), TinkarTerm.PREFERRED)
                 .synonym("Express Axiom", TinkarTerm.ACCEPTABLE)
@@ -813,6 +820,15 @@ public class TinkarStarterData {
                 .pathMembership()
                 .build();
 
+        starterData.concept(dialect)
+                .fullyQualifiedName("Dialect", TinkarTerm.PREFERRED)
+                .synonym("Dialect", TinkarTerm.PREFERRED)
+                .definition("Specifies the dialect of the language", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, dialect.asUuidArray()[0].toString())
+                .statedNavigation(List.of(englishDialect), List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
         starterData.concept(TinkarTerm.DIGRAPH_FIELD)
                 .fullyQualifiedName("DiGraph field (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Instant/ DiGraph", TinkarTerm.PREFERRED)
@@ -1110,6 +1126,15 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.CONCEPT_TYPE))
                 .build();
 
+        starterData.concept(identifierPattern)
+                .fullyQualifiedName("Identifier Pattern", TinkarTerm.PREFERRED)
+                .synonym("Identifier Pattern", TinkarTerm.PREFERRED)
+                .definition("An identifier pattern is used to identity a concept which contains the identifier source and the actual value", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, identifierPattern.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(pattern))
+                .statedDefinition(List.of(pattern))
+                .build();
+
         starterData.concept(TinkarTerm.IDENTIFIER_SOURCE)
                 .fullyQualifiedName("Identifier source (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Identifier source", TinkarTerm.PREFERRED)
@@ -1117,6 +1142,16 @@ public class TinkarStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IDENTIFIER_SOURCE.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        Concept implicationSet = Concept.make("Implication set", uuidUtility.createUUID("Implication set"));
+        starterData.concept(implicationSet)
+                .fullyQualifiedName("Implication set", TinkarTerm.PREFERRED)
+                .synonym("Implication set", TinkarTerm.PREFERRED)
+                .definition("A set of relationships that indicate something is has an implication. Not necessarily or sufficient but implicated.", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, implicationSet.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .build();
 
         starterData.concept(TinkarTerm.INACTIVE_STATE)
@@ -1290,10 +1325,19 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        starterData.concept(languageForDescription)
+                .fullyQualifiedName("Language for description)", TinkarTerm.PREFERRED)
+                .synonym("Language for description", TinkarTerm.PREFERRED)
+                .definition("The semantic value indicating which language is used in the description text", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, languageForDescription.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
         starterData.concept(TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION)
                 .fullyQualifiedName("Language concept nid for description (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Language for description", TinkarTerm.PREFERRED)
-                .definition("captures the language code for a descriptiom", TinkarTerm.PREFERRED)
+                .definition("captures the language code for a description", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_VERSION_PROPERTIES))
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_VERSION_PROPERTIES))
@@ -1678,6 +1722,15 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.OBJECT))
                 .build();
 
+        starterData.concept(pattern)
+                .fullyQualifiedName("Pattern", TinkarTerm.PREFERRED)
+                .synonym("Pattern", TinkarTerm.PREFERRED)
+                .definition("A Pattern is a set of display fields and values that can be asserted about a concept", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATH.asUuidArray()[0].toString())
+                .statedNavigation(List.of(TinkarTerm.MEANING, TinkarTerm.PURPOSE, TinkarTerm.DISPLAY_FIELDS), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
+                .build();
+
         starterData.concept(TinkarTerm.PATH_CONCEPT)
                 .fullyQualifiedName("Path concept (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Path concept", TinkarTerm.PREFERRED)
@@ -1938,6 +1991,15 @@ public class TinkarStarterData {
                 .definition("Role operator?", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_OPERATOR.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.UNIVERSAL_RESTRICTION, TinkarTerm.REFERENCED_COMPONENT_SUBTYPE_RESTRICTION, TinkarTerm.REFERENCED_COMPONENT_TYPE_RESTRICTION), List.of(TinkarTerm.ROLE))
+                .statedDefinition(List.of(TinkarTerm.ROLE))
+                .build();
+
+        starterData.concept(roleRestriction)
+                .fullyQualifiedName("Role restriction", TinkarTerm.PREFERRED)
+                .synonym("Role value", TinkarTerm.PREFERRED)
+                .definition("", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, roleRestriction.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(TinkarTerm.ROLE))
                 .statedDefinition(List.of(TinkarTerm.ROLE))
                 .build();
 
