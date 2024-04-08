@@ -71,7 +71,6 @@ public class TinkarStarterData {
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
         Concept axiomSyntax = Concept.make("Axiom Syntax", uuidUtility.createUUID("Axiom Syntax"));
-        Concept dialect = Concept.make("Dialect", uuidUtility.createUUID("Dialect"));
         Concept englishDialect = Concept.make("English dialect", uuidUtility.createUUID("English dialect"));
         Concept expressAxiom = Concept.make("Express axiom syntax", uuidUtility.createUUID("Express axiom syntax"));
         Concept identifierPattern = Concept.make("Identifier pattern", uuidUtility.createUUID("Identifier pattern"));
@@ -96,8 +95,8 @@ public class TinkarStarterData {
                 .synonym("English dialect", TinkarTerm.PREFERRED)
                 .definition("Specifies the dialect of the English language", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, englishDialect.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.US_ENGLISH_DIALECT), List.of(dialect))
-                .statedDefinition(List.of(dialect))
+                .statedNavigation(List.of(TinkarTerm.GB_ENGLISH_DIALECT, TinkarTerm.US_ENGLISH_DIALECT), List.of(TinkarTerm.DIALECT_ASSEMBLAGE))
+                .statedDefinition(List.of(TinkarTerm.DIALECT_ASSEMBLAGE))
                 .build();
 
         starterData.concept(textComparison)
@@ -818,15 +817,6 @@ public class TinkarStarterData {
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
                 .pathMembership()
-                .build();
-
-        starterData.concept(dialect)
-                .fullyQualifiedName("Dialect", TinkarTerm.PREFERRED)
-                .synonym("Dialect", TinkarTerm.PREFERRED)
-                .definition("Specifies the dialect of the language", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, dialect.asUuidArray()[0].toString())
-                .statedNavigation(List.of(englishDialect), List.of(TinkarTerm.MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
         starterData.concept(TinkarTerm.DIGRAPH_FIELD)
@@ -2572,10 +2562,11 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.MEANING))
                 .build();
 
+        // COMMENT: WAITING FOR CONFIRMATION
         starterData.concept(TinkarTerm.DIALECT_ASSEMBLAGE)
-                .fullyQualifiedName("Dialect assemblage (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Dialect assemblage", TinkarTerm.PREFERRED)
-                .definition("Language assembling, collection or grouping", TinkarTerm.PREFERRED)
+                .fullyQualifiedName("Dialect", TinkarTerm.PREFERRED)
+                .synonym("Dialect", TinkarTerm.PREFERRED)
+                .definition("Specifies the dialect of the language.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DIALECT_ASSEMBLAGE.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.CZECH_DIALECT, englishDialect, TinkarTerm.FRENCH_DIALECT, TinkarTerm.IRISH_DIALECT, TinkarTerm.KOREAN_DIALECT, TinkarTerm.POLISH_DIALECT, TinkarTerm.RUSSIAN_DIALECT), List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
