@@ -73,7 +73,7 @@ public class TinkarStarterData {
         Concept axiomSyntax = Concept.make("Axiom Syntax", uuidUtility.createUUID("Axiom Syntax"));
         Concept englishDialect = Concept.make("English dialect", uuidUtility.createUUID("English dialect"));
         Concept expressAxiom = Concept.make("Express axiom syntax", uuidUtility.createUUID("Express axiom syntax"));
-        Concept identifierPattern = Concept.make("Identifier pattern", uuidUtility.createUUID("Identifier pattern"));
+        Concept implicationSet = Concept.make("Implication set", uuidUtility.createUUID("Implication set"));
         Concept languageForDescription = Concept.make("Language for description", uuidUtility.createUUID("Language for description"));
         Concept pattern = Concept.make("Pattern", uuidUtility.createUUID("Pattern"));
         Concept roleRestriction = Concept.make("Role restriction", uuidUtility.createUUID("Role restriction"));
@@ -1116,15 +1116,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.CONCEPT_TYPE))
                 .build();
 
-        starterData.concept(identifierPattern)
-                .fullyQualifiedName("Identifier Pattern", TinkarTerm.PREFERRED)
-                .synonym("Identifier Pattern", TinkarTerm.PREFERRED)
-                .definition("An identifier pattern is used to identity a concept which contains the identifier source and the actual value", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, identifierPattern.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(pattern))
-                .statedDefinition(List.of(pattern))
-                .build();
-
         starterData.concept(TinkarTerm.IDENTIFIER_SOURCE)
                 .fullyQualifiedName("Identifier source (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Identifier source", TinkarTerm.PREFERRED)
@@ -1134,7 +1125,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        Concept implicationSet = Concept.make("Implication set", uuidUtility.createUUID("Implication set"));
         starterData.concept(implicationSet)
                 .fullyQualifiedName("Implication set", TinkarTerm.PREFERRED)
                 .synonym("Implication set", TinkarTerm.PREFERRED)
@@ -1316,8 +1306,8 @@ public class TinkarStarterData {
                 .build();
 
         starterData.concept(languageForDescription)
-                .fullyQualifiedName("Language for description)", TinkarTerm.PREFERRED)
-                .synonym("Language for description", TinkarTerm.PREFERRED)
+                .fullyQualifiedName("Language for Description)", TinkarTerm.PREFERRED)
+                .synonym("Language for Description", TinkarTerm.PREFERRED)
                 .definition("The semantic value indicating which language is used in the description text", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, languageForDescription.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.MODEL_CONCEPT))
