@@ -1,5 +1,7 @@
 package dev.ikm.tinkar.sandbox;
 
+import dev.ikm.tinkar.common.id.PublicId;
+import dev.ikm.tinkar.common.id.PublicIds;
 import dev.ikm.tinkar.common.util.uuid.UuidUtil;
 import dev.ikm.tinkar.entity.export.ExportEntitiesController;
 import dev.ikm.tinkar.starterdata.StarterData;
@@ -198,7 +200,10 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         /* No UUID from SNOMED Browser -  'SNOMED has no concept for Manufacturer yet'  */
-        EntityProxy.Concept manufacturerIdentifier = EntityProxy.Concept.make("Manufacturer", uuidUtility.createUUID("LIDR Device Manufacturer"));
+
+
+        PublicId publicId = PublicIds.of(UUID.nameUUIDFromBytes("Manufacturer".getBytes()));
+        EntityProxy.Concept manufacturerIdentifier = EntityProxy.Concept.make(publicId);
         starterData.concept(manufacturerIdentifier)
                 .fullyQualifiedName("Manufacturer", TinkarTerm.PREFERRED)
                 .synonym("Manufacturer (company)", TinkarTerm.PREFERRED)
