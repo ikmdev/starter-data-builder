@@ -273,15 +273,18 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         /* UUID from SNOMED Browser - This is the ECL query : '57134006 |Instrument, device (physical object)|'  */
-        EntityProxy.Concept instrumentIdentifier = EntityProxy.Concept.make("Device", UuidUtil.fromSNOMED("57134006"));
+        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Device".getBytes()));
+        EntityProxy.Concept instrumentIdentifier = EntityProxy.Concept.make(publicId);
+        //EntityProxy.Concept instrumentIdentifier = EntityProxy.Concept.make("Device", UuidUtil.fromSNOMED("57134006"));
         starterData.concept(instrumentIdentifier)
                 .fullyQualifiedName("Instrument, device (physical object)", TinkarTerm.PREFERRED)
                 .synonym("Clinical instrument", TinkarTerm.PREFERRED)
                 .definition("Instrument, device (physical object)", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, instrumentIdentifier.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.MODEL_CONCEPT, instrumentIdentifier.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .statedNavigation(List.of(instrumentIdentifier),List.of(TinkarTerm.MODEL_CONCEPT))
+                //.statedNavigation(List.of(instrumentIdentifier),List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
+
 
         /* UUID from SNOMED Browser - This is the ECL query : '43222004 |Test kit method (procedure)|'  */
         // Maybe take this out since it is not just plain "Test kit".
