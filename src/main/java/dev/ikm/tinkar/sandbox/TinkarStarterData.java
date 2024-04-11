@@ -1174,7 +1174,6 @@ public class TinkarStarterData {
                 .synonym("Integer field", TinkarTerm.PREFERRED)
                 .definition("data type that represents some range of mathematical integers", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.INTEGER_FIELD.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
                 .statedNavigation(null, List.of(TinkarTerm.DISPLAY_FIELDS))
                 .statedDefinition(List.of(TinkarTerm.DISPLAY_FIELDS))
                 .build();
@@ -2166,7 +2165,6 @@ public class TinkarStarterData {
                 .synonym("Status", TinkarTerm.PREFERRED)
                 .definition("The status of the STAMP Coordinate(Active, Cancelled, Inactive, Primordial)", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STATUS_VALUE.asUuidArray()[0].toString())
-                .inferredNavigation(List.of(TinkarTerm.ACTIVE_STATE, TinkarTerm.CANCELED_STATE, TinkarTerm.INACTIVE_STATE, TinkarTerm.PRIMORDIAL_STATE, TinkarTerm.WITHDRAWN_STATE), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedNavigation(List.of(TinkarTerm.ACTIVE_STATE, TinkarTerm.CANCELED_STATE, TinkarTerm.INACTIVE_STATE, TinkarTerm.PRIMORDIAL_STATE, TinkarTerm.WITHDRAWN_STATE), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
@@ -2401,7 +2399,6 @@ public class TinkarStarterData {
                 .synonym("Withdrawn state", TinkarTerm.PREFERRED)
                 .definition("Concept used to represent a status for components that are withdrawn.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.WITHDRAWN_STATE.asUuidArray()[0].toString())
-                .inferredNavigation(null, List.of(TinkarTerm.STATUS_VALUE))
                 .statedNavigation(null, List.of(TinkarTerm.STATUS_VALUE))
                 .statedDefinition(List.of(TinkarTerm.STATUS_VALUE))
                 .build();
