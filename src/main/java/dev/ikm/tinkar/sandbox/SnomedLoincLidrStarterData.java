@@ -284,6 +284,15 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 //.statedNavigation(List.of(instrumentIdentifier),List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
+        /*
+        .fullyQualifiedName("Manufacturer", TinkarTerm.PREFERRED)
+                .synonym("Manufacturer (company)", TinkarTerm.PREFERRED)
+                .definition("Defines the name of the legal entity that manufactures the test kit and Instrument", TinkarTerm.IDENTIFIER_SOURCE)
+                .identifier(TinkarTerm.MODEL_CONCEPT, manufacturerIdentifier.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+         */
 
 
         /* UUID from SNOMED Browser - This is the ECL query : '43222004 |Test kit method (procedure)|'  */
