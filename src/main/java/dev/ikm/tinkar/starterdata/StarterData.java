@@ -217,6 +217,27 @@ public class StarterData {
             return this;
         }
 
+        public PatternBuilder fullyQualifiedName(String text, EntityProxy.Concept dialectAcceptability){
+            var fqnSemantic = semanticUtility.createDescriptionSemantic(patternNid, TinkarTerm.FULLY_QUALIFIED_NAME_DESCRIPTION_TYPE, text, authoringSTAMP);
+            starterDataEntities.add(fqnSemantic);
+            starterDataEntities.add(semanticUtility.createDialectSemantic(fqnSemantic.nid(), dialectAcceptability, authoringSTAMP));
+            return this;
+        }
+
+        public PatternBuilder synonym(String text, EntityProxy.Concept dialectAcceptability){
+            var synonymSemantic = semanticUtility.createDescriptionSemantic(patternNid, TinkarTerm.REGULAR_NAME_DESCRIPTION_TYPE, text, authoringSTAMP);
+            starterDataEntities.add(synonymSemantic);
+            starterDataEntities.add(semanticUtility.createDialectSemantic(synonymSemantic.nid(), dialectAcceptability, authoringSTAMP));
+            return this;
+        }
+
+        public PatternBuilder definition(String text, EntityProxy.Concept dialectAcceptability){
+            var definitionSemantic = semanticUtility.createDescriptionSemantic(patternNid, TinkarTerm.DEFINITION_DESCRIPTION_TYPE, text, authoringSTAMP);
+            starterDataEntities.add(definitionSemantic);
+            starterDataEntities.add(semanticUtility.createDialectSemantic(definitionSemantic.nid(), dialectAcceptability, authoringSTAMP));
+            return this;
+        }
+
         public EntityProxy.Pattern build(){
             assert patternProxy.description() != null;
             starterDataEntities.add(patternUtility.createPattern(
