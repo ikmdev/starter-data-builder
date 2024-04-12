@@ -2782,6 +2782,9 @@ public class TinkarStarterData {
 
         //Create Description Pattern
         starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
+                .fullyQualifiedName("Description Pattern", TinkarTerm.PREFERRED)
+                .synonym("Description Pattern", TinkarTerm.PREFERRED)
+                .definition("Contains all metadata and human readable text that describes the concept", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.DESCRIPTION_SEMANTIC)
                 .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
                 .fieldDefinition(
@@ -2804,6 +2807,9 @@ public class TinkarStarterData {
 
         //Create Stated Navigation Pattern
         starterData.pattern(TinkarTerm.STATED_NAVIGATION_PATTERN)
+                .fullyQualifiedName("Stated Navigation Pattern", TinkarTerm.PREFERRED)
+                .synonym("Stated Navigation Pattern", TinkarTerm.PREFERRED)
+                .definition("A pattern specifying the origins and destinations for concepts based on the stated terminological axioms.", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.IS_A)
                 .purpose(TinkarTerm.IS_A)
                 .fieldDefinition(
@@ -2826,6 +2832,9 @@ public class TinkarStarterData {
 
         //Create Inferred Navigation Pattern
         starterData.pattern(TinkarTerm.INFERRED_NAVIGATION_PATTERN)
+                .fullyQualifiedName("Inferred Navigation Pattern", TinkarTerm.PREFERRED)
+                .synonym("Inferred Navigation Pattern", TinkarTerm.PREFERRED)
+                .definition("A pattern specifying the origins and destinations for concepts based on the inferred terminological axioms.", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.IS_A)
                 .purpose(TinkarTerm.IS_A)
                 .fieldDefinition(
@@ -2868,6 +2877,9 @@ public class TinkarStarterData {
 
         //Create Identifier Pattern
         starterData.pattern(StarterDataTerm.IDENTIFIER_PATTERN)
+                .fullyQualifiedName("Identifier Pattern", TinkarTerm.PREFERRED)
+                .synonym("Identifier Pattern", TinkarTerm.PREFERRED)
+                .definition("An identifier pattern is used to identity a concept which contains the identifier source and the actual value.", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.IDENTIFIER_SOURCE)
                 .purpose(TinkarTerm.IDENTIFIER_SOURCE)
                 .fieldDefinition(
@@ -2882,6 +2894,8 @@ public class TinkarStarterData {
 
         //Create US Dialect Pattern
         starterData.pattern(TinkarTerm.US_DIALECT_PATTERN)
+                .fullyQualifiedName("US Dialect Pattern", TinkarTerm.PREFERRED)
+                .synonym("US Dialect Pattern", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.DESCRIPTION_ACCEPTABILITY)
                 .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
                 .fieldDefinition(
@@ -2892,6 +2906,9 @@ public class TinkarStarterData {
 
         //Create GB Dialect Pattern
         starterData.pattern(TinkarTerm.GB_DIALECT_PATTERN)
+                .fullyQualifiedName("GB Dialect Pattern", TinkarTerm.PREFERRED)
+                .synonym("GB Dialect Pattern", TinkarTerm.PREFERRED)
+                .definition("Particular form of language specific form of English language, particular to Great Britain.", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.DESCRIPTION_ACCEPTABILITY)
                 .purpose(TinkarTerm.DESCRIPTION_SEMANTIC)
                 .fieldDefinition(
@@ -2912,6 +2929,8 @@ public class TinkarStarterData {
 
         //Create Stated Definition Pattern
         starterData.pattern(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN)
+                .fullyQualifiedName("EL++ Stated Axioms Pattern", TinkarTerm.PREFERRED)
+                .synonym("Stated definition pattern", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.DESCRIPTUM)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
@@ -2922,6 +2941,8 @@ public class TinkarStarterData {
 
         //Create Inferred Definition Pattern
         starterData.pattern(TinkarTerm.EL_PLUS_PLUS_INFERRED_AXIOMS_PATTERN)
+                .fullyQualifiedName("EL++ Inferred Axioms Pattern", TinkarTerm.PREFERRED)
+                .synonym("Inferred definition pattern", TinkarTerm.PREFERRED)
                 .meaning(TinkarTerm.DESCRIPTUM)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
