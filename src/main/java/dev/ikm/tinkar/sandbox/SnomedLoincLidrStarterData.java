@@ -403,7 +403,7 @@ public class SnomedLoincLidrStarterData {
         EntityProxy.Concept lidrSpecimenConcept = EntityProxy.Concept.make("LIDR Specimen", uuidUtility.createUUID("LIDR Specimen"));
         starterData.concept(lidrSpecimenConcept)
                 .fullyQualifiedName("LIDR Specimen", TinkarTerm.PREFERRED)
-                .synonym("LIDR Specimen", TinkarTerm.PREFERRED)
+                .synonym("Specimen", TinkarTerm.PREFERRED)
                 .definition("Laboratory Interoperability Device Reference Result Specimen", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, lidrSpecimenConcept.asUuidArray()[0].toString())
                 .statedDefinition(List.of(lidrConcept))
