@@ -125,7 +125,7 @@ class SemanticUtility {
                 .leastSignificantBits(navigationSemanticUUID.getLeastSignificantBits())
                 .mostSignificantBits(navigationSemanticUUID.getMostSignificantBits())
                 .additionalUuidLongs(null)
-                .patternNid(StarterDataTerm.IDENTIFIER_PATTERN.nid())
+                .patternNid(TinkarTerm.IDENTIFIER_PATTERN.nid())
                 .referencedComponentNid(referencedComponentNid)
                 .versions(versions.toImmutable())
                 .build();
@@ -184,7 +184,7 @@ class SemanticUtility {
                 .leastSignificantBits(axiomSyntaxSemantic.getLeastSignificantBits())
                 .mostSignificantBits(axiomSyntaxSemantic.getMostSignificantBits())
                 .additionalUuidLongs(null)
-                .patternNid(StarterDataTerm.AXIOM_SYNTAX_PATTERN.nid())
+                .patternNid(TinkarTerm.OWL_AXIOM_SYNTAX_PATTERN.nid())
                 .referencedComponentNid(referencedComponentNid)
                 .versions(versions.toImmutable())
                 .build();
@@ -277,7 +277,7 @@ class SemanticUtility {
         MutableList<Object> statedDefinitionFields = Lists.mutable.empty();
 
         MutableList<EntityVertex> vertexMap = Lists.mutable.empty();
-        MutableIntObjectMap<ImmutableIntList> succesorMap = IntObjectMaps.mutable.empty();
+        MutableIntObjectMap<ImmutableIntList> successorMap = IntObjectMaps.mutable.empty();
         MutableIntIntMap predecessorMap = IntIntMaps.mutable.empty();
 
         int vertexIdx = 0;
@@ -295,10 +295,10 @@ class SemanticUtility {
         vertexMap.add(definitionRootVertex);
 
         //Reference(s)
-        MutableIntList referenceVeterxIdxList = IntLists.mutable.empty();
+        MutableIntList referenceVertexIdxList = IntLists.mutable.empty();
         for (EntityProxy.Concept originConcept : originConceptList) {
             int referenceIdx = vertexIdx++;
-            referenceVeterxIdxList.add(referenceIdx);
+            referenceVertexIdxList.add(referenceIdx);
 
             UUID referenceUUID = uuidUtility.createUUID();
             MutableMap<ConceptDTO, Object> referenceProperty = Maps.mutable.empty();
@@ -338,18 +338,18 @@ class SemanticUtility {
         int andIdx = vertexIdx-1;
 
         //Successor Map
-        succesorMap.put(0, IntLists.immutable.of(necessarySetIdx).toImmutable());
-        succesorMap.put(andIdx, referenceVeterxIdxList.toImmutable());
-        succesorMap.put(necessarySetIdx, IntLists.immutable.of(andIdx).toImmutable());
+        successorMap.put(0, IntLists.immutable.of(necessarySetIdx).toImmutable());
+        successorMap.put(andIdx, referenceVertexIdxList.toImmutable());
+        successorMap.put(necessarySetIdx, IntLists.immutable.of(andIdx).toImmutable());
 
         //Predecessor Map
-        for (int referenceIdx : referenceVeterxIdxList.toArray()) {
+        for (int referenceIdx : referenceVertexIdxList.toArray()) {
             predecessorMap.put(referenceIdx, andIdx);
         }
         predecessorMap.put(andIdx, necessarySetIdx);
         predecessorMap.put(necessarySetIdx, 0);
 
-        statedDefinitionFields.add(new DiTreeEntity(definitionRootVertex, vertexMap.toImmutable(), succesorMap.toImmutable(), predecessorMap.toImmutable()));
+        statedDefinitionFields.add(new DiTreeEntity(definitionRootVertex, vertexMap.toImmutable(), successorMap.toImmutable(), predecessorMap.toImmutable()));
 
         versions.add(SemanticVersionRecordBuilder.builder()
                 .chronology(semanticRecord)

@@ -13,7 +13,6 @@ import dev.ikm.tinkar.entity.transform.EntityToTinkarSchemaTransformer;
 import dev.ikm.tinkar.entity.transform.TinkarSchemaToEntityTransformer;
 import dev.ikm.tinkar.schema.TinkarMsg;
 import dev.ikm.tinkar.starterdata.StarterData;
-import dev.ikm.tinkar.starterdata.StarterDataTerm;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.EntityProxy.Concept;
@@ -2873,7 +2872,7 @@ public class TinkarStarterData {
                 .build();
 
         //Create Identifier Pattern
-        starterData.pattern(StarterDataTerm.IDENTIFIER_PATTERN)
+        starterData.pattern(TinkarTerm.IDENTIFIER_PATTERN)
                 .fullyQualifiedName("Identifier Pattern", TinkarTerm.PREFERRED)
                 .synonym("Identifier Pattern", TinkarTerm.PREFERRED)
                 .definition("An identifier pattern is used to identity a concept which contains the identifier source and the actual value.", TinkarTerm.PREFERRED)
@@ -2915,7 +2914,7 @@ public class TinkarStarterData {
                 .build();
 
         //Create Axiom Syntax Pattern
-        starterData.pattern(StarterDataTerm.AXIOM_SYNTAX_PATTERN)
+        starterData.pattern(TinkarTerm.OWL_AXIOM_SYNTAX_PATTERN)
                 .meaning(axiomSyntax)
                 .purpose(expressAxiom)
                 .fieldDefinition(
@@ -3012,20 +3011,14 @@ public class TinkarStarterData {
                         TinkarTerm.STRING)
                 .build();
 
-        //Create Authoring base model pattern
-        starterData.pattern(StarterDataTerm.AUTHORING_BASE_MODEL_PATTERN)
-                .meaning(starterDataAuthoring)
-                .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
-                .build();
-
         //Create Tinkar Core base model pattern
-        starterData.pattern(StarterDataTerm.TINKAR_CORE_BASE_MODEL_PATTERN)
+        starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
                 .meaning(starterDataAuthoring)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
 
         //Create Komet base model component pattern
-        starterData.pattern(StarterDataTerm.KOMET_BASE_MODEL_PATTERN)
+        starterData.pattern(TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN)
                 .meaning(starterDataAuthoring)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
