@@ -86,7 +86,8 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //LOINC Long Common Name
-        EntityProxy.Concept loincCommonName = EntityProxy.Concept.make("LOINC Long Common Name", uuidUtility.createUUID("LOINC Long Common Name"));
+        PublicId publicId = PublicIds.of(UUID.nameUUIDFromBytes("LOINC Long Name".getBytes()));
+        EntityProxy.Concept loincCommonName = EntityProxy.Concept.make(publicId);
         starterData.concept(loincCommonName)
                 .fullyQualifiedName("LOINC Long Common Name", TinkarTerm.PREFERRED)
                 .synonym("LOINC Long Name", TinkarTerm.PREFERRED)
@@ -201,7 +202,7 @@ public class SnomedLoincLidrStarterData {
         /* No UUID from SNOMED Browser -  'SNOMED has no concept for Manufacturer yet'  */
 
 
-        PublicId publicId = PublicIds.of(UUID.nameUUIDFromBytes("Manufacturer".getBytes()));
+        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Manufacturer".getBytes()));
         EntityProxy.Concept manufacturerIdentifier = EntityProxy.Concept.make(publicId);
         starterData.concept(manufacturerIdentifier)
                 .fullyQualifiedName("Manufacturer", TinkarTerm.PREFERRED)
@@ -301,7 +302,8 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Target - can't find the target related concept we want in SNOMEDLOINC
-        EntityProxy.Concept targetConcept = EntityProxy.Concept.make("Target", uuidUtility.createUUID("Target"));
+        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Target".getBytes()));
+        EntityProxy.Concept targetConcept = EntityProxy.Concept.make(publicId);
         starterData.concept(targetConcept)
                 .fullyQualifiedName("Target", TinkarTerm.PREFERRED)
                 .synonym("Target", TinkarTerm.PREFERRED)
@@ -368,7 +370,8 @@ public class SnomedLoincLidrStarterData {
     private static void configureResultConformanceAndAnalyteConcepts(StarterData starterData, UUIDUtility uuidUtility, EntityProxy.Concept lidrConcept) {
 
         /* UUID from SNOMED Browser - This is the ECL query : '246478007 |Analyte measured (attribute)|'  */
-        EntityProxy.Concept analyteConcept = EntityProxy.Concept.make("Analyte", uuidUtility.createUUID("Analyte"));
+        PublicId publicId = PublicIds.of(UUID.nameUUIDFromBytes("Analyte".getBytes()));
+        EntityProxy.Concept analyteConcept = EntityProxy.Concept.make(publicId);
         starterData.concept(analyteConcept)
                 .fullyQualifiedName("Analyte", TinkarTerm.PREFERRED)
                 .synonym("Analyte", TinkarTerm.PREFERRED)
@@ -378,7 +381,8 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         /* No UUID from SNOMED Browser -  'SNOMED has no concept for Result Conformance yet'  */
-        EntityProxy.Concept resultConformanceConcept = EntityProxy.Concept.make("Result Conformance", uuidUtility.createUUID("Result Conformance"));
+        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Result Conformance".getBytes()));
+        EntityProxy.Concept resultConformanceConcept = EntityProxy.Concept.make(publicId);
         starterData.concept(resultConformanceConcept)
                 .fullyQualifiedName("Result Conformance", TinkarTerm.PREFERRED)
                 .synonym("Result Constraints", TinkarTerm.PREFERRED)
@@ -439,7 +443,8 @@ public class SnomedLoincLidrStarterData {
     private static void configureLidrSpecimenConcept(StarterData starterData, UUIDUtility uuidUtility, EntityProxy.Concept lidrConcept) {
 
         /* No UUID from SNOMED Browser -  'SNOMED has no concept for LIDR Specimen yet'  */
-        EntityProxy.Concept lidrSpecimenConcept = EntityProxy.Concept.make("Specimen", uuidUtility.createUUID("Specimen"));
+        PublicId publicId = PublicIds.of(UUID.nameUUIDFromBytes("Specimen".getBytes()));
+        EntityProxy.Concept lidrSpecimenConcept = EntityProxy.Concept.make(publicId);
         starterData.concept(lidrSpecimenConcept)
                 .fullyQualifiedName("Specimen", TinkarTerm.PREFERRED)
                 .synonym("Specimen", TinkarTerm.PREFERRED)
@@ -484,7 +489,8 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Specimen Collection Method  -  This is wrong SNOMED LOINC has Method I think?
-        EntityProxy.Concept specimenCollectionMethodConcept = EntityProxy.Concept.make("Specimen Collection Method", uuidUtility.createUUID("Specimen Collection Method"));
+        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Specimen Collection Method".getBytes()));
+        EntityProxy.Concept specimenCollectionMethodConcept = EntityProxy.Concept.make(publicId);
         starterData.concept(specimenCollectionMethodConcept)
                 .fullyQualifiedName("Specimen Collection Method", TinkarTerm.PREFERRED)
                 .synonym("Specimen collection method (SNOMED CT®)", TinkarTerm.PREFERRED)
