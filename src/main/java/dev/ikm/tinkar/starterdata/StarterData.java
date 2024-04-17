@@ -4,6 +4,7 @@ import dev.ikm.tinkar.common.service.CachingService;
 import dev.ikm.tinkar.common.service.PrimitiveData;
 import dev.ikm.tinkar.common.service.ServiceKeys;
 import dev.ikm.tinkar.common.service.ServiceProperties;
+import dev.ikm.tinkar.common.util.time.DateTimeUtil;
 import dev.ikm.tinkar.entity.*;
 import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.TinkarTerm;
@@ -143,9 +144,20 @@ public class StarterData {
         }
 
         public ConceptBuilder pathMembership(){
-            builderEntities.add(semanticUtility.createMembershipSemantic(conceptNid, StarterDataTerm.PATH_MEMBERSHIP_PATTERN, authoringSTAMP));
+            builderEntities.add(
+                    semanticUtility.createSemanticFromPatternWithFields(conceptNid, TinkarTerm.PATHS_PATTERN, Lists.mutable.empty(), authoringSTAMP)
+            );
             return this;
         }
+
+        public ConceptBuilder pathOrigin(EntityProxy.Concept originPath){
+            MutableList<Object> fields = Lists.mutable.of(originPath, DateTimeUtil.epochMsToInstant(Long.MAX_VALUE));
+            builderEntities.add(
+                    semanticUtility.createSemanticFromPatternWithFields(conceptNid, TinkarTerm.PATH_ORIGINS_PATTERN, fields, authoringSTAMP)
+            );
+            return this;
+        }
+
 
         public ConceptBuilder versionControl(EntityProxy.Concept concept, String formattedTime){
             builderEntities.add(semanticUtility.createVersionControlSemantic(conceptNid, concept, formattedTime, authoringSTAMP));

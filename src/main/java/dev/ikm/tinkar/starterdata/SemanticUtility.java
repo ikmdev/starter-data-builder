@@ -231,18 +231,20 @@ class SemanticUtility {
         return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
     }
 
-    protected Entity<? extends EntityVersion> createMembershipSemantic(int referencedComponentNid,
-                                                                       EntityProxy.Pattern membershipPattern,
-                                                                       Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Path Membership Semantic");
+
+    protected Entity<? extends EntityVersion> createSemanticFromPatternWithFields(int referencedComponentNid,
+                                                                        EntityProxy.Pattern pattern,
+                                                                        MutableList<Object> fields,
+                                                                        Entity<? extends EntityVersion> authoringSTAMP){
+        LOG.info("Building Semantic Record");
         RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
-        UUID pathMembershipSemantic = uuidUtility.createUUID();
+        UUID semanticUuid = uuidUtility.createUUID();
         SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
-                .nid(EntityService.get().nidForUuids(pathMembershipSemantic))
-                .leastSignificantBits(pathMembershipSemantic.getLeastSignificantBits())
-                .mostSignificantBits(pathMembershipSemantic.getMostSignificantBits())
+                .nid(EntityService.get().nidForUuids(semanticUuid))
+                .leastSignificantBits(semanticUuid.getLeastSignificantBits())
+                .mostSignificantBits(semanticUuid.getMostSignificantBits())
                 .additionalUuidLongs(null)
-                .patternNid(membershipPattern.nid())
+                .patternNid(pattern.nid())
                 .referencedComponentNid(referencedComponentNid)
                 .versions(versions.toImmutable())
                 .build();
@@ -250,7 +252,7 @@ class SemanticUtility {
         versions.add(SemanticVersionRecordBuilder.builder()
                 .chronology(semanticRecord)
                 .stampNid(authoringSTAMP.nid())
-                .fieldValues(Lists.immutable.empty())
+                .fieldValues(fields.toImmutable())
                 .build());
         return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
     }

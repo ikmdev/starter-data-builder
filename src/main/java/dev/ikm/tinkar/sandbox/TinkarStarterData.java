@@ -815,6 +815,8 @@ public class TinkarStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.DEVELOPMENT_PATH.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
+                .pathOrigin(TinkarTerm.SANDBOX_PATH)
                 .build();
 
         starterData.concept(TinkarTerm.DIGRAPH_FIELD)
@@ -1455,6 +1457,8 @@ public class TinkarStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MASTER_PATH.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
+                .pathOrigin(TinkarTerm.DEVELOPMENT_PATH)
                 .build();
 
         starterData.concept(TinkarTerm.MEANING)
@@ -1634,7 +1638,7 @@ public class TinkarStarterData {
                 .synonym("Object", TinkarTerm.PREFERRED)
                 .definition("an encapsulation of data together with procedures", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.OBJECT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.STATUS_VALUE, TinkarTerm.DESCRIPTION, TinkarTerm.NID, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.SANDBOX_COMPONENT, TinkarTerm.MODULE, TinkarTerm.PATH, TinkarTerm.PATH_ORIGINS_PATTERN, TinkarTerm.PATHS_PATTERN, TinkarTerm.OBJECT_PROPERTIES), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(TinkarTerm.STATUS_VALUE, TinkarTerm.DESCRIPTION, TinkarTerm.NID, TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ANY_COMPONENT, TinkarTerm.UNINITIALIZED_COMPONENT, TinkarTerm.SANDBOX_COMPONENT, TinkarTerm.MODULE, TinkarTerm.PATH, TinkarTerm.OBJECT_PROPERTIES), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .build();
 
@@ -1791,14 +1795,14 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.PATH_COORDINATE_PROPERTIES))
                 .build();
 
-        starterData.concept(TinkarTerm.PATH_ORIGINS_PATTERN)
-                .fullyQualifiedName("Path origins pattern (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Path origins pattern", TinkarTerm.PREFERRED)
-                .definition("Pattern of path origins", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATH_ORIGINS_PATTERN.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.OBJECT))
-                .statedDefinition(List.of(TinkarTerm.OBJECT))
-                .build();
+//        starterData.concept(TinkarTerm.PATH_ORIGINS_PATTERN)
+//                .fullyQualifiedName("Path origins pattern (SOLOR)", TinkarTerm.PREFERRED)
+//                .synonym("Path origins pattern", TinkarTerm.PREFERRED)
+//                .definition("Pattern of path origins", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATH_ORIGINS_PATTERN.asUuidArray()[0].toString())
+//                .statedNavigation(null, List.of(TinkarTerm.OBJECT))
+//                .statedDefinition(List.of(TinkarTerm.OBJECT))
+//                .build();
 
         starterData.concept(TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH)
                 .fullyQualifiedName("Path origins for stamp path (SOLOR)", TinkarTerm.PREFERRED)
@@ -1888,6 +1892,7 @@ public class TinkarStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PRIMORDIAL_PATH.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
                 .build();
 
         starterData.concept(TinkarTerm.PRIMORDIAL_STATE)
@@ -2059,6 +2064,8 @@ public class TinkarStarterData {
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.SANDBOX_PATH.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.PATH))
                 .statedDefinition(List.of(TinkarTerm.PATH))
+                .pathMembership()
+                .pathOrigin(TinkarTerm.PRIMORDIAL_PATH)
                 .build();
 
         starterData.concept(TinkarTerm.SANDBOX_PATH_MODULE)
@@ -2661,20 +2668,20 @@ public class TinkarStarterData {
                 .build();
 
 
-        starterData.concept(TinkarTerm.TRANSITIVE_FEATURE)
+        starterData.concept(TinkarTerm.TRANSITIVE_PROPERTY)
                 .fullyQualifiedName("Transitive Feature (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Transitive Feature", TinkarTerm.PREFERRED)
-                .definition(TinkarTerm.TRANSITIVE_FEATURE.description(), TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TRANSITIVE_FEATURE.asUuidArray()[0].toString())
+                .definition(TinkarTerm.TRANSITIVE_PROPERTY.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TRANSITIVE_PROPERTY.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(uncategorizedGrouper))
                 .statedDefinition(List.of(uncategorizedGrouper))
                 .build();
 
-        starterData.concept(TinkarTerm.REFLEXIVE_FEATURE)
+        starterData.concept(TinkarTerm.REFLEXIVE_PROPERTY)
                 .fullyQualifiedName("Reflexive Feature (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Reflexive Feature", TinkarTerm.PREFERRED)
-                .definition(TinkarTerm.REFLEXIVE_FEATURE.description(), TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFLEXIVE_FEATURE.asUuidArray()[0].toString())
+                .definition(TinkarTerm.REFLEXIVE_PROPERTY.description(), TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.REFLEXIVE_PROPERTY.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(uncategorizedGrouper))
                 .statedDefinition(List.of(uncategorizedGrouper))
                 .build();
@@ -2952,7 +2959,7 @@ public class TinkarStarterData {
                 .build();
 
         //Create Path Membership Pattern
-        starterData.pattern(StarterDataTerm.PATH_MEMBERSHIP_PATTERN)
+        starterData.pattern(TinkarTerm.PATHS_PATTERN)
                 .meaning(TinkarTerm.PATH)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .build();
@@ -3002,6 +3009,31 @@ public class TinkarStarterData {
                         TinkarTerm.PATH_ORIGINS,
                         TinkarTerm.STRING)
                 .build();
+
+        starterData.pattern(TinkarTerm.PATH_ORIGINS_PATTERN)
+                .fullyQualifiedName("Path origins pattern (SOLOR)", TinkarTerm.PREFERRED)
+                .synonym("Path origins pattern", TinkarTerm.PREFERRED)
+                .definition("Pattern of path origins", TinkarTerm.PREFERRED)
+                .meaning(TinkarTerm.PATH_ORIGINS)
+                .purpose(TinkarTerm.PATH_ORIGINS)
+                .fieldDefinition(
+                        TinkarTerm.PATH_CONCEPT,
+                        TinkarTerm.PATH_CONCEPT,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.PATH_ORIGINS,
+                        TinkarTerm.PATH_ORIGINS,
+                        TinkarTerm.INSTANT_LITERAL)
+                .build();
+
+//        starterData.pattern(TinkarTerm.PATHS_PATTERN)
+//                .meaning(TinkarTerm.PATH)
+//                .purpose(TinkarTerm.PATH)
+//                .fieldDefinition(
+//                        TinkarTerm.PATH_CONCEPT,
+//                        TinkarTerm.PATH_CONCEPT,
+//                        TinkarTerm.COMPONENT_FIELD)
+//                .build();
 
         //Create Comment Pattern
         starterData.pattern(TinkarTerm.COMMENT_PATTERN)
