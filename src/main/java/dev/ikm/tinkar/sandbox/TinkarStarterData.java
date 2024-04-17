@@ -1230,8 +1230,8 @@ public class TinkarStarterData {
                 .synonym("Is-a inferred navigation (SOLOR)", TinkarTerm.PREFERRED)
                 .definition("designates the parent child relationship following the application of the reasoner", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IS_A_INFERRED_NAVIGATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION_PATTERN))
-                .statedDefinition(List.of(TinkarTerm.NAVIGATION_PATTERN))
+                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION))
+                .statedDefinition(List.of(TinkarTerm.NAVIGATION))
                 .build();
 
         starterData.concept(TinkarTerm.IS_A_STATED_NAVIGATION)
@@ -1239,8 +1239,8 @@ public class TinkarStarterData {
                 .synonym("is-a stated navigation", TinkarTerm.PREFERRED)
                 .definition("designates the parent child relationship as authored", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IS_A_STATED_NAVIGATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION_PATTERN))
-                .statedDefinition(List.of(TinkarTerm.NAVIGATION_PATTERN))
+                .statedNavigation(null, List.of(TinkarTerm.NAVIGATION))
+                .statedDefinition(List.of(TinkarTerm.NAVIGATION))
                 .build();
 
         starterData.concept(TinkarTerm.ITALIAN_LANGUAGE)
@@ -1574,7 +1574,7 @@ public class TinkarStarterData {
                 .synonym("Navigation", TinkarTerm.PREFERRED)
                 .definition("Navigation", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NAVIGATION.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_VERTEX, TinkarTerm.NAVIGATION_PATTERN), List.of(TinkarTerm.PURPOSE))
+                .statedNavigation(List.of(TinkarTerm.NAVIGATION_CONCEPT_SET, TinkarTerm.NAVIGATION_VERTEX), List.of(TinkarTerm.PURPOSE))
                 .statedDefinition(List.of(TinkarTerm.PURPOSE))
                 .build();
 
@@ -1584,15 +1584,6 @@ public class TinkarStarterData {
                 .definition("Navigating sets of concepts?", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NAVIGATION_CONCEPT_SET.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.NAVIGATION))
-                .statedDefinition(List.of(TinkarTerm.NAVIGATION))
-                .build();
-
-        starterData.concept(TinkarTerm.NAVIGATION_PATTERN)
-                .fullyQualifiedName("Navigation pattern (SOLOR)", TinkarTerm.PREFERRED)
-                .synonym("Navigation pattern", TinkarTerm.PREFERRED)
-                .definition("Navigation pattern (Inferred/Stated)", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.NAVIGATION_PATTERN.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.IS_A_INFERRED_NAVIGATION, TinkarTerm.IS_A_STATED_NAVIGATION), List.of(TinkarTerm.NAVIGATION))
                 .statedDefinition(List.of(TinkarTerm.NAVIGATION))
                 .build();
 
@@ -2667,7 +2658,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
 
-
         starterData.concept(TinkarTerm.TRANSITIVE_PROPERTY)
                 .fullyQualifiedName("Transitive Feature (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Transitive Feature", TinkarTerm.PREFERRED)
@@ -2829,10 +2819,10 @@ public class TinkarStarterData {
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .build();
 
-        starterData.concept(StarterDataTerm.STATED_NAVIGATION)
+        starterData.concept(TinkarTerm.STATED_NAVIGATION)
                 .fullyQualifiedName("Stated navigation (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Stated navigation", TinkarTerm.PREFERRED)
-                .definition(StarterDataTerm.STATED_NAVIGATION.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.STATED_NAVIGATION.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
@@ -2855,16 +2845,16 @@ public class TinkarStarterData {
                 .build();
 
 
-        starterData.concept(StarterDataTerm.INFERRED_NAVIGATION)
+        starterData.concept(TinkarTerm.INFERRED_NAVIGATION)
                 .fullyQualifiedName("Inferred navigation (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Inferred navigation", TinkarTerm.PREFERRED)
-                .definition(StarterDataTerm.INFERRED_NAVIGATION.description(), TinkarTerm.PREFERRED)
+                .definition(TinkarTerm.INFERRED_NAVIGATION.description(), TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_ASSEMBLAGE_FOR_LOGIC_COORDINATE.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .build();
 
-        starterData.pattern(StarterDataTerm.INFERRED_DEFINITION_PATTERN)
+        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_INFERRED_AXIOMS_PATTERN)
                 .meaning(TinkarTerm.DESCRIPTUM)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
@@ -2873,7 +2863,7 @@ public class TinkarStarterData {
                         TinkarTerm.DITREE_FIELD)
                         .build();
 
-        starterData.pattern(StarterDataTerm.STATED_DEFINITION_PATTERN)
+        starterData.pattern(TinkarTerm.EL_PLUS_PLUS_STATED_AXIOMS_PATTERN)
                 .meaning(TinkarTerm.DESCRIPTUM)
                 .purpose(TinkarTerm.LOGICAL_DEFINITION)
                 .fieldDefinition(
@@ -2996,20 +2986,6 @@ public class TinkarStarterData {
                         TinkarTerm.COMPONENT_FIELD)
                 .build();
 
-        //Create Version control path origin pattern
-        starterData.pattern(StarterDataTerm.VERSION_CONTROL_PATTERN) //Try TinkarTerm.Path-origins with instant
-                .meaning(TinkarTerm.PATH_ORIGINS_FOR_STAMP_PATH)
-                .purpose(TinkarTerm.PATH_ORIGINS)
-                .fieldDefinition(
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.PATH_CONCEPT,
-                        TinkarTerm.COMPONENT_FIELD)
-                .fieldDefinition(
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.PATH_ORIGINS,
-                        TinkarTerm.STRING)
-                .build();
-
         starterData.pattern(TinkarTerm.PATH_ORIGINS_PATTERN)
                 .fullyQualifiedName("Path origins pattern (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Path origins pattern", TinkarTerm.PREFERRED)
@@ -3025,15 +3001,6 @@ public class TinkarStarterData {
                         TinkarTerm.PATH_ORIGINS,
                         TinkarTerm.INSTANT_LITERAL)
                 .build();
-
-//        starterData.pattern(TinkarTerm.PATHS_PATTERN)
-//                .meaning(TinkarTerm.PATH)
-//                .purpose(TinkarTerm.PATH)
-//                .fieldDefinition(
-//                        TinkarTerm.PATH_CONCEPT,
-//                        TinkarTerm.PATH_CONCEPT,
-//                        TinkarTerm.COMPONENT_FIELD)
-//                .build();
 
         //Create Comment Pattern
         starterData.pattern(TinkarTerm.COMMENT_PATTERN)

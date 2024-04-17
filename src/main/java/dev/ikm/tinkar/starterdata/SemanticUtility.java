@@ -257,36 +257,6 @@ class SemanticUtility {
         return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
     }
 
-    protected Entity<? extends EntityVersion> createVersionControlSemantic(int referencedComponentNid,
-                                                                           EntityProxy.Concept concept,
-                                                                           String formattedTime,
-                                                                           Entity<? extends EntityVersion> authoringSTAMP){
-        LOG.info("Building Version Control Semantic");
-        RecordListBuilder<SemanticVersionRecord> versions = RecordListBuilder.make();
-        UUID versionControlSemantic = uuidUtility.createUUID();
-        SemanticRecord semanticRecord = SemanticRecordBuilder.builder()
-                .nid(EntityService.get().nidForUuids(versionControlSemantic))
-                .leastSignificantBits(versionControlSemantic.getLeastSignificantBits())
-                .mostSignificantBits(versionControlSemantic.getMostSignificantBits())
-                .additionalUuidLongs(null)
-                .patternNid(StarterDataTerm.VERSION_CONTROL_PATTERN.nid())
-                .referencedComponentNid(referencedComponentNid)
-                .versions(versions.toImmutable())
-                .build();
-
-        LOG.info("Building Version Control Semantics Fields");
-        MutableList<Object> versionControlFields = Lists.mutable.empty();
-        versionControlFields.add(concept);
-        versionControlFields.add(formattedTime);
-
-        versions.add(SemanticVersionRecordBuilder.builder()
-                .chronology(semanticRecord)
-                .stampNid(authoringSTAMP.nid())
-                .fieldValues(versionControlFields.toImmutable())
-                .build());
-        return SemanticRecordBuilder.builder(semanticRecord).versions(versions.toImmutable()).build();
-    }
-
     protected Entity<? extends EntityVersion> createStatedDefinitionSemantic(int referencedComponentNid,
                                                                              List<EntityProxy.Concept> originConceptList,
                                                                              Entity<? extends EntityVersion> authoringSTAMP){

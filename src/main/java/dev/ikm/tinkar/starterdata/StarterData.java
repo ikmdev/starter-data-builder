@@ -158,12 +158,6 @@ public class StarterData {
             return this;
         }
 
-
-        public ConceptBuilder versionControl(EntityProxy.Concept concept, String formattedTime){
-            builderEntities.add(semanticUtility.createVersionControlSemantic(conceptNid, concept, formattedTime, authoringSTAMP));
-            return this;
-        }
-
         public ConceptBuilder statedDefinition(List<EntityProxy.Concept> originConceptList){
             builderEntities.add(semanticUtility.createStatedDefinitionSemantic(conceptNid, originConceptList, authoringSTAMP));
             return this;
