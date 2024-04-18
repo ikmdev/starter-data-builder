@@ -195,7 +195,7 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Manufacturered By".getBytes()));
+        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Manufactured By".getBytes()));
         EntityProxy.Concept manufacturedByIdentifier = EntityProxy.Concept.make(publicId);
         starterData.concept(manufacturedByIdentifier)
                 .fullyQualifiedName("Manufactured By", TinkarTerm.PREFERRED)
@@ -305,17 +305,17 @@ public class SnomedLoincLidrStarterData {
                 .definition("A thing made or adapted for a particular purpose, especially a piece of mechanical or electronic equipment", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.MODEL_CONCEPT, instrumentIdentifier.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                //.statedNavigation(List.of(instrumentIdentifier),List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
-        /*
-        .fullyQualifiedName("Manufacturer", TinkarTerm.PREFERRED)
-                .synonym("Manufacturer (company)", TinkarTerm.PREFERRED)
-                .definition("Defines the name of the legal entity that manufactures the test kit and Instrument", TinkarTerm.IDENTIFIER_SOURCE)
-                .identifier(TinkarTerm.MODEL_CONCEPT, manufacturerIdentifier.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-         */
+        publicId = PublicIds.of(UUID.nameUUIDFromBytes("LIDR Records".getBytes()));
+        EntityProxy.Concept lidrRecords = EntityProxy.Concept.make(publicId);
+        starterData.concept(lidrRecords)
+                .fullyQualifiedName("LIDR Records", TinkarTerm.PREFERRED)
+                .synonym("LIDR Records", TinkarTerm.PREFERRED)
+                .definition("A model concept to hold LIDR records", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.MODEL_CONCEPT, lidrRecords.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
 
 
         /* UUID from SNOMED Browser - This is the ECL query : '43222004 |Test kit method (procedure)|'  */
