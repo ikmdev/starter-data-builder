@@ -158,6 +158,21 @@ public class StarterData {
             return this;
         }
 
+        public ConceptBuilder tinkarBaseModelMembership(){
+            builderEntities.add(
+                    semanticUtility.createSemanticFromPatternWithFields(conceptNid, TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN, Lists.mutable.empty(), authoringSTAMP)
+            );
+            return this;
+        }
+
+        public ConceptBuilder kometBaseModelMembership(){
+            starterDataEntities.add(
+                    semanticUtility.createSemanticFromPatternWithFields(conceptNid, TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN, Lists.mutable.empty(), authoringSTAMP)
+            );
+            return this;
+        }
+
+
         public ConceptBuilder statedDefinition(List<EntityProxy.Concept> originConceptList){
             builderEntities.add(semanticUtility.createStatedDefinitionSemantic(conceptNid, originConceptList, authoringSTAMP));
             return this;
@@ -243,6 +258,21 @@ public class StarterData {
             starterDataEntities.add(semanticUtility.createDialectSemantic(definitionSemantic.nid(), dialectAcceptability, authoringSTAMP));
             return this;
         }
+
+        public PatternBuilder tinkarBaseModelMembership(){
+            starterDataEntities.add(
+                    semanticUtility.createSemanticFromPatternWithFields(patternNid, TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN, Lists.mutable.empty(), authoringSTAMP)
+            );
+            return this;
+        }
+
+        public PatternBuilder kometBaseModelMembership(){
+            starterDataEntities.add(
+                    semanticUtility.createSemanticFromPatternWithFields(patternNid, TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN, Lists.mutable.empty(), authoringSTAMP)
+            );
+            return this;
+        }
+
 
         public EntityProxy.Pattern build(){
             assert patternProxy.description() != null;
