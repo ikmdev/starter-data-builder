@@ -10,10 +10,7 @@ import dev.ikm.tinkar.terms.EntityProxy;
 import dev.ikm.tinkar.terms.TinkarTerm;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 public class SnomedLoincLidrStarterData {
@@ -21,6 +18,8 @@ public class SnomedLoincLidrStarterData {
 
     private static File exportDataStore;
     private static File exportFile;
+
+    private static HashMap <String, EntityProxy.Concept> fullyQualifiedNameToConceptMap = new HashMap<>();
     public static void main(String args[]){
 
         exportDataStore = new File(args[0]);
@@ -220,6 +219,15 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        starterData.pattern( EntityProxy.Pattern.make("Qualitative Allowed Result Set Pattern", uuidUtility.createUUID("Qualitative Allowed Result Set Pattern")))
+                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .fieldDefinition(
+                        allowedResultSetIdentifier,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
         publicId = PublicIds.of(UUID.nameUUIDFromBytes("Allowed Result".getBytes()));
         EntityProxy.Concept allowedResultIdentifier = EntityProxy.Concept.make(publicId);
         starterData.concept(allowedResultIdentifier)
@@ -228,6 +236,8 @@ public class SnomedLoincLidrStarterData {
                 .identifier(TinkarTerm.MODEL_CONCEPT, allowedResultIdentifier.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
+
+
 
         EntityProxy.Concept deviceIDType = EntityProxy.Concept.make("Device ID Type", uuidUtility.createUUID("Device ID Type"));
         starterData.concept(deviceIDType)
@@ -267,6 +277,15 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        starterData.pattern( EntityProxy.Pattern.make("Instrument Equipment Pattern", uuidUtility.createUUID("Instrument Equipment Pattern")))
+                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .fieldDefinition(
+                        instEquipmentConcept,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
         //Instrument Equipment Name ID
         EntityProxy.Concept  instEquipNameIDConcept = EntityProxy.Concept.make("Instrument Equipment Name ID", uuidUtility.createUUID("Instrument Equipment Name ID"));
         starterData.concept(instEquipNameIDConcept)
@@ -286,6 +305,8 @@ public class SnomedLoincLidrStarterData {
                 .identifier(TinkarTerm.MODEL_CONCEPT, targetConcept.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
+
+        fullyQualifiedNameToConceptMap.put("Target", targetConcept);
 
         /* UUID from SNOMED Browser - This is the ECL query : '57134006 |Instrument, device (physical object)|'  */
         publicId = PublicIds.of(UUID.nameUUIDFromBytes("Device".getBytes()));
@@ -336,6 +357,7 @@ public class SnomedLoincLidrStarterData {
         configureLIDR_MetaDataPattern(starterData, uuidUtility);
         configurePhenomenonNavigation(starterData, uuidUtility);
         configureVendorCodeDescriptionPattern(starterData, uuidUtility);
+        createTestPerformedPattern(starterData, uuidUtility);
 
     }
 
@@ -351,6 +373,8 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        fullyQualifiedNameToConceptMap.put("Analyte", analyteConcept);
+
         /* No UUID from SNOMED Browser -  'SNOMED has no concept for Result Conformance yet'  */
         publicId = PublicIds.of(UUID.nameUUIDFromBytes("Result Conformance".getBytes()));
         EntityProxy.Concept resultConformanceConcept = EntityProxy.Concept.make(publicId);
@@ -362,6 +386,8 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        fullyQualifiedNameToConceptMap.put("Result Conformance", resultConformanceConcept);
+
         EntityProxy.Concept dataResultsType = EntityProxy.Concept.make("Data Results Type", uuidUtility.createUUID("Data Results Type"));
         starterData.concept(dataResultsType)
                 .fullyQualifiedName("Data Results Type", TinkarTerm.PREFERRED)
@@ -370,6 +396,8 @@ public class SnomedLoincLidrStarterData {
                 .identifier(TinkarTerm.MODEL_CONCEPT, dataResultsType.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
+
+        fullyQualifiedNameToConceptMap.put("Data Results Type", dataResultsType);
 
         //Quantitative Data Results
         EntityProxy.Concept quantDataResults = EntityProxy.Concept.make("Quantitative Data Result", uuidUtility.createUUID("Quantitative Data Results"));
@@ -422,6 +450,8 @@ public class SnomedLoincLidrStarterData {
                 .identifier(TinkarTerm.MODEL_CONCEPT, lidrSpecimenConcept.asUuidArray()[0].toString())
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
+
+        fullyQualifiedNameToConceptMap.put("Specimen", lidrSpecimenConcept);
 
         //In SNOMED-LOINC now: 371439000 |Specimen type (observable entity)| will be the source for below as per spreadsheet LIDRStarterData:
         //Specimen Type
@@ -660,6 +690,9 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(testPerformed),List.of(lidrMetadataConcept,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        fullyQualifiedNameToConceptMap.put("Test Performed", testPerformed);
+
+
         //Vendor Comment
         EntityProxy.Concept vendorComment = EntityProxy.Concept.make("Vendor Comment", uuidUtility.createUUID("Vendor Comment"));
         starterData.concept(vendorComment)
@@ -679,6 +712,44 @@ public class SnomedLoincLidrStarterData {
 
         starterData.concept(lidrMetadataConcept)
                 .statedNavigation(metaDataConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        starterData.pattern( EntityProxy.Pattern.make("LIDR MetaData Pattern", uuidUtility.createUUID("LIDR MetaData Pattern")))
+                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .fieldDefinition(
+                        dateMappingPerformed,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        loincVersionID,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        sourceOfEntry,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        committeeReviewed,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        vendorReviewed,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        vendorComment,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
+        starterData.pattern( EntityProxy.Pattern.make("Diagnostic Device Pattern", uuidUtility.createUUID("Diagnostic Device Pattern")))
+                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .fieldDefinition(
+                        testOrdered,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
                 .build();
     }
 
@@ -770,6 +841,20 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(loincUnitsType),List.of(phenomenonConcept,TinkarTerm.MODEL_CONCEPT))
                 .build();
 
+        starterData.pattern( EntityProxy.Pattern.make("Quantitative Allowed Result Pattern", uuidUtility.createUUID("Quantitative Allowed Result Pattern")))
+                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .fieldDefinition(
+                        loincUnitsType,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        TinkarTerm.STRING,
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
+
         lidrPhenomenonConcepts.addAll(List.of(loincComponent,loincProperty,loincTimeAspect,
                 loincDirectSite, loincScaleType, methodType,loincUnitsType));
 
@@ -778,6 +863,37 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
     }
+
+    private static void createTestPerformedPattern(StarterData starterData, UUIDUtility uuidUtility)
+    {
+
+        starterData.pattern( EntityProxy.Pattern.make("Test Performed Pattern (LIDR Record)", uuidUtility.createUUID("Test Performed Pattern (LIDR Record)")))
+                .meaning(TinkarTerm.IDENTIFIER_SOURCE)
+                .purpose(TinkarTerm.IDENTIFIER_SOURCE)
+                .fieldDefinition(
+                        fullyQualifiedNameToConceptMap.get("Test Performed"),
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        fullyQualifiedNameToConceptMap.get("Data Results Type"),
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        fullyQualifiedNameToConceptMap.get("Analyte"),
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        fullyQualifiedNameToConceptMap.get("Specimen"),
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .fieldDefinition(
+                        fullyQualifiedNameToConceptMap.get("Result Conformance"),
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_FIELD)
+                .build();
+
+    }
+
 
     private static void buildSampleLIDRConcept(StarterData starterData, List<EntityProxy.Concept> definitionConcepts,
                                                 EntityProxy.Concept lidrRecordConcept)
