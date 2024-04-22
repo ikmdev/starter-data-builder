@@ -14,14 +14,11 @@ import dev.ikm.tinkar.entity.transform.TinkarSchemaToEntityTransformer;
 import dev.ikm.tinkar.schema.TinkarMsg;
 import dev.ikm.tinkar.starterdata.StarterData;
 import dev.ikm.tinkar.starterdata.UUIDUtility;
-import dev.ikm.tinkar.terms.EntityProxy;
-import dev.ikm.tinkar.terms.EntityProxy.Concept;
 import dev.ikm.tinkar.terms.TinkarTerm;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
@@ -68,16 +65,6 @@ public class TinkarStarterData {
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
-
-        Concept axiomSyntax = Concept.make("Axiom Syntax", uuidUtility.createUUID("Axiom Syntax"));
-        Concept expressAxiom = Concept.make("Express axiom syntax", uuidUtility.createUUID("Express axiom syntax"));
-        Concept implicationSet = Concept.make("Implication set", uuidUtility.createUUID("Implication set"));
-        Concept languageForDescription = Concept.make("Language for description", uuidUtility.createUUID("Language for description"));
-        Concept pattern = Concept.make("Pattern", uuidUtility.createUUID("Pattern"));
-        Concept roleRestriction = Concept.make("Role restriction", uuidUtility.createUUID("Role restriction"));
-        Concept starterDataAuthoring = EntityProxy.Concept.make("Starter Data Authoring", uuidUtility.createUUID());
-        Concept textComparison = EntityProxy.Concept.make("TEXT_COMPARISON", UUID.randomUUID());
-
         starterData.concept(TinkarTerm.ENGLISH_DIALECT_ASSEMBLAGE)
                 .fullyQualifiedName("English Dialect", TinkarTerm.PREFERRED)
                 .synonym("English dialect", TinkarTerm.PREFERRED)
@@ -88,43 +75,43 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(textComparison)
+        starterData.concept(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC)
                 .fullyQualifiedName("Text comparison measure semantic (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Text comparison", TinkarTerm.PREFERRED)
                 .definition("Text comparison with a focus on semantic meaning involves evaluating the similarity or relatedness between pieces of text based on their underlying meaning rather than just their surface structure.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, textComparison.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.CASE_INSENSITIVE_EVALUATION, TinkarTerm.CASE_SENSITIVE_EVALUATION), List.of(TinkarTerm.MEANING))
                 .statedDefinition(List.of(TinkarTerm.MEANING))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(starterDataAuthoring)
-                .fullyQualifiedName(starterDataAuthoring.description(), TinkarTerm.PREFERRED)
+        starterData.concept(TinkarTerm.STARTER_DATA_AUTHORING)
+                .fullyQualifiedName(TinkarTerm.STARTER_DATA_AUTHORING.description(), TinkarTerm.PREFERRED)
                 .synonym("Metadata Authoring", TinkarTerm.ACCEPTABLE)
                 .definition("Define necessary minimum viable concepts to use Tinkar Data", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, starterDataAuthoring.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.STARTER_DATA_AUTHORING.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.USER))
                 .statedDefinition(List.of(TinkarTerm.USER))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(axiomSyntax)
-                .fullyQualifiedName(axiomSyntax.description(), TinkarTerm.PREFERRED)
+        starterData.concept(TinkarTerm.AXIOM_SYNTAX)
+                .fullyQualifiedName(TinkarTerm.AXIOM_SYNTAX.description(), TinkarTerm.PREFERRED)
                 .synonym("Axiom Syntax", TinkarTerm.ACCEPTABLE)
                 .definition("Syntax defining description logic", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, axiomSyntax.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.AXIOM_SYNTAX.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(expressAxiom)
-                .fullyQualifiedName(expressAxiom.description(), TinkarTerm.PREFERRED)
+        starterData.concept(TinkarTerm.EXPRESS_AXIOM_SYNTAX)
+                .fullyQualifiedName(TinkarTerm.EXPRESS_AXIOM_SYNTAX.description(), TinkarTerm.PREFERRED)
                 .synonym("Express Axiom", TinkarTerm.ACCEPTABLE)
                 .definition("Expressing description logic through syntax", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, expressAxiom.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(axiomSyntax))
-                .statedDefinition(List.of(axiomSyntax))
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EXPRESS_AXIOM_SYNTAX.asUuidArray()[0].toString())
+                .statedNavigation(null, List.of(TinkarTerm.AXIOM_SYNTAX))
+                .statedDefinition(List.of(TinkarTerm.AXIOM_SYNTAX))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -333,8 +320,8 @@ public class TinkarStarterData {
                 .synonym("Ignore case", TinkarTerm.PREFERRED)
                 .definition("Evaluates values regardless of the case", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CASE_INSENSITIVE_EVALUATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(textComparison))
-                .statedDefinition(List.of(textComparison))
+                .statedNavigation(null, List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
+                .statedDefinition(List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -343,8 +330,8 @@ public class TinkarStarterData {
                 .synonym("Compare case", TinkarTerm.PREFERRED)
                 .definition("Evaluated based on the case", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CASE_SENSITIVE_EVALUATION.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(textComparison))
-                .statedDefinition(List.of(textComparison))
+                .statedNavigation(null, List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
+                .statedDefinition(List.of(TinkarTerm.TEXT_COMPARISON_MEASURE_SEMANTIC))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1005,7 +992,7 @@ public class TinkarStarterData {
                 .synonym("EL++ Inferred terminological axioms", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, implicationSet, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.IMPLICATION_SET, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
@@ -1026,7 +1013,7 @@ public class TinkarStarterData {
                 .synonym("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, implicationSet, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.NECESSARY_SET, TinkarTerm.SUFFICIENT_SET, TinkarTerm.IMPLICATION_SET, TinkarTerm.ROLE, TinkarTerm.ROLE_GROUP), List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
@@ -1231,11 +1218,11 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(implicationSet)
+        starterData.concept(TinkarTerm.IMPLICATION_SET)
                 .fullyQualifiedName("Implication set", TinkarTerm.PREFERRED)
                 .synonym("Implication set", TinkarTerm.PREFERRED)
                 .definition("A set of relationships that indicate something is has an implication. Not necessarily or sufficient but implicated.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, implicationSet.asUuidArray()[0].toString())
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.IMPLICATION_SET.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .statedDefinition(List.of(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
@@ -1441,16 +1428,6 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(languageForDescription)
-                .fullyQualifiedName("Language for Description)", TinkarTerm.PREFERRED)
-                .synonym("Language for Description", TinkarTerm.PREFERRED)
-                .definition("The semantic value indicating which language is used in the description text", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, languageForDescription.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.MODEL_CONCEPT))
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .tinkarBaseModelMembership()
-                .build();
-
         starterData.concept(TinkarTerm.LANGUAGE_CONCEPT_NID_FOR_DESCRIPTION)
                 .fullyQualifiedName("Language concept nid for description (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Language for description", TinkarTerm.PREFERRED)
@@ -1628,7 +1605,7 @@ public class TinkarStarterData {
                 .synonym("Model concept", TinkarTerm.PREFERRED)
                 .definition("", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.MODEL_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY, TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.DESCRIPTION_TYPE, TinkarTerm.DESCRIPTUM, TinkarTerm.DIALECT_ASSEMBLAGE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.IS_A, TinkarTerm.LANGUAGE, languageForDescription, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE, TinkarTerm.PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN, TinkarTerm.TEXT_FOR_DESCRIPTION, axiomSyntax), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(TinkarTerm.DESCRIPTION, TinkarTerm.DESCRIPTION_ACCEPTABILITY, TinkarTerm.DESCRIPTION_CASE_SIGNIFICANCE, TinkarTerm.DESCRIPTION_SEMANTIC, TinkarTerm.DESCRIPTION_TYPE, TinkarTerm.DESCRIPTUM, TinkarTerm.DIALECT_ASSEMBLAGE, TinkarTerm.DISPLAY_FIELDS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.IDENTIFIER_SOURCE, TinkarTerm.IS_A, TinkarTerm.LANGUAGE, TinkarTerm.LOGICAL_DEFINITION, TinkarTerm.MEANING, TinkarTerm.PURPOSE, TinkarTerm.PHENOMENON, TinkarTerm.RELATIONSHIP_DESTINATION, TinkarTerm.RELATIONSHIP_ORIGIN, TinkarTerm.TEXT_FOR_DESCRIPTION, TinkarTerm.AXIOM_SYNTAX), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
@@ -1870,16 +1847,6 @@ public class TinkarStarterData {
                 .definition("A set of assets under version control that can be managed distinctly from other assets. Paths “branch” from other paths when established, and can be “merged” with other paths as well.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATH.asUuidArray()[0].toString())
                 .statedNavigation(List.of(TinkarTerm.DEVELOPMENT_PATH, TinkarTerm.MASTER_PATH, TinkarTerm.PRIMORDIAL_PATH, TinkarTerm.SANDBOX_PATH), List.of(TinkarTerm.ROOT_VERTEX))
-                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
-                .tinkarBaseModelMembership()
-                .build();
-
-        starterData.concept(pattern)
-                .fullyQualifiedName("Pattern", TinkarTerm.PREFERRED)
-                .synonym("Pattern", TinkarTerm.PREFERRED)
-                .definition("A Pattern is a set of display fields and values that can be asserted about a concept", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.PATH.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.MEANING, TinkarTerm.PURPOSE, TinkarTerm.DISPLAY_FIELDS), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
@@ -2140,7 +2107,7 @@ public class TinkarStarterData {
                 .synonym("Role", TinkarTerm.PREFERRED)
                 .definition("Is an abstract representation of a high-level role for a therapeutic medicinal product; the concepts are not intended to describe a detailed indication for therapeutic use nor imply that therapeutic use is appropriate in all clinical situations.", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_OPERATOR, roleRestriction), List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
+                .statedNavigation(List.of(TinkarTerm.ROLE_TYPE, TinkarTerm.ROLE_OPERATOR, TinkarTerm.ROLE_RESTRICTION), List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .statedDefinition(List.of(TinkarTerm.ROLE_GROUP, TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS, TinkarTerm.EL_PLUS_PLUS_INFERRED_TERMINOLOGICAL_AXIOMS))
                 .tinkarBaseModelMembership()
                 .build();
@@ -2165,11 +2132,11 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-        starterData.concept(roleRestriction)
-                .fullyQualifiedName("Role restriction", TinkarTerm.PREFERRED)
+        starterData.concept(TinkarTerm.ROLE_RESTRICTION)
+                .fullyQualifiedName(TinkarTerm.ROLE_RESTRICTION.description(), TinkarTerm.PREFERRED)
                 .synonym("Role value", TinkarTerm.PREFERRED)
-                .definition("", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, roleRestriction.asUuidArray()[0].toString())
+                .definition("Role restriction", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROLE_RESTRICTION.asUuidArray()[0].toString())
                 .statedNavigation(null, List.of(TinkarTerm.ROLE))
                 .statedDefinition(List.of(TinkarTerm.ROLE))
                 .tinkarBaseModelMembership()
@@ -2562,7 +2529,7 @@ public class TinkarStarterData {
                 .synonym("Author", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.USER.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.MODULE_FOR_USER, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PATH_FOR_USER, starterDataAuthoring), List.of(TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(List.of(TinkarTerm.KOMET_USER, TinkarTerm.KOMET_USER_LIST, TinkarTerm.MODULE_FOR_USER, TinkarTerm.ORDER_FOR_AXIOM_ATTACHMENTS, TinkarTerm.ORDER_FOR_CONCEPT_ATTACHMENTS, TinkarTerm.ORDER_FOR_DESCRIPTION_ATTACHMENTS, TinkarTerm.PATH_FOR_USER, TinkarTerm.STARTER_DATA_AUTHORING), List.of(TinkarTerm.ROOT_VERTEX))
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
@@ -3184,11 +3151,11 @@ public class TinkarStarterData {
 
         //Create Axiom Syntax Pattern
         starterData.pattern(TinkarTerm.OWL_AXIOM_SYNTAX_PATTERN)
-                .meaning(axiomSyntax)
-                .purpose(expressAxiom)
+                .meaning(TinkarTerm.AXIOM_SYNTAX)
+                .purpose(TinkarTerm.EXPRESS_AXIOM_SYNTAX)
                 .fieldDefinition(
-                        axiomSyntax,
-                        expressAxiom,
+                        TinkarTerm.AXIOM_SYNTAX,
+                        TinkarTerm.EXPRESS_AXIOM_SYNTAX,
                         TinkarTerm.STRING)
                 .tinkarBaseModelMembership()
                 .build();
@@ -3231,7 +3198,6 @@ public class TinkarStarterData {
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .tinkarBaseModelMembership()
                 .build();
-
 
         //Create STAMP Pattern
         starterData.pattern(TinkarTerm.STAMP_PATTERN)
@@ -3290,14 +3256,14 @@ public class TinkarStarterData {
 
         //Create Tinkar Core base model pattern
         starterData.pattern(TinkarTerm.TINKAR_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(starterDataAuthoring)
+                .meaning(TinkarTerm.STARTER_DATA_AUTHORING)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .tinkarBaseModelMembership()
                 .build();
 
         //Create Komet base model component pattern
         starterData.pattern(TinkarTerm.KOMET_BASE_MODEL_COMPONENT_PATTERN)
-                .meaning(starterDataAuthoring)
+                .meaning(TinkarTerm.STARTER_DATA_AUTHORING)
                 .purpose(TinkarTerm.MEMBERSHIP_SEMANTIC)
                 .kometBaseModelMembership()
                 .build();
