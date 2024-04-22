@@ -61,7 +61,6 @@ public class TinkarStarterData {
 
         //Load exported starter data into clean database
         importStarterData(); //load pb.zip into database
-
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
@@ -520,7 +519,7 @@ public class TinkarStarterData {
                 .synonym("Concept type", TinkarTerm.PREFERRED)
                 .definition("A field that captures a defined concept label", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.CONCEPT_TYPE.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.HEALTH_CONCEPT, TinkarTerm.PATH_CONCEPT, TinkarTerm.SEMANTIC_FIELD_CONCEPTS), List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(List.of(TinkarTerm.ANONYMOUS_CONCEPT, TinkarTerm.PATH_CONCEPT, TinkarTerm.SEMANTIC_FIELD_CONCEPTS), List.of(TinkarTerm.MODEL_CONCEPT))
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .tinkarBaseModelMembership()
                 .build();
@@ -1007,7 +1006,6 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-
         starterData.concept(TinkarTerm.EL_PLUS_PLUS_STATED_TERMINOLOGICAL_AXIOMS)
                 .fullyQualifiedName("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
                 .synonym("EL++ Stated terminological axioms", TinkarTerm.PREFERRED)
@@ -1203,8 +1201,8 @@ public class TinkarStarterData {
                 .synonym("Health concept", TinkarTerm.PREFERRED)
                 .definition("Null", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.HEALTH_CONCEPT.asUuidArray()[0].toString())
-                .statedNavigation(null, List.of(TinkarTerm.CONCEPT_TYPE, TinkarTerm.ROOT_VERTEX))
-                .statedDefinition(List.of(TinkarTerm.CONCEPT_TYPE, TinkarTerm.ROOT_VERTEX))
+                .statedNavigation(null, List.of(TinkarTerm.ROOT_VERTEX))
+                .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
 
@@ -1739,7 +1737,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.SUFFICIENT_CONCEPT_DEFINITION_OPERATOR))
                 .tinkarBaseModelMembership()
                 .build();
-
 
         starterData.concept(TinkarTerm.NECESSARY_SET)
                 .fullyQualifiedName("Necessary set", TinkarTerm.PREFERRED)
@@ -2709,7 +2706,7 @@ public class TinkarStarterData {
                 .synonym("Tinkar root concept", TinkarTerm.PREFERRED)
                 .definition("Terminologies that are represented in a harmonized manner", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, TinkarTerm.ROOT_VERTEX.asUuidArray()[0].toString())
-                .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, TinkarTerm.OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE), null)
+                .statedNavigation(List.of(TinkarTerm.MODEL_CONCEPT, TinkarTerm.MEANING, TinkarTerm.OBJECT, TinkarTerm.ROLE, TinkarTerm.USER, TinkarTerm.ANNOTATION_TYPE, TinkarTerm.CREATIVE_COMMONS_BY_LICENSE, TinkarTerm.HEALTH_CONCEPT), null)
                 .statedDefinition(List.of(TinkarTerm.ROOT_VERTEX))
                 .tinkarBaseModelMembership()
                 .build();
@@ -2867,7 +2864,6 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-
         starterData.concept(TinkarTerm.SOLOR_OVERLAY_MODULE)
                 .fullyQualifiedName("SOLOR overlay module (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("SOLOR overlay module", TinkarTerm.PREFERRED)
@@ -2877,7 +2873,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .tinkarBaseModelMembership()
                 .build();
-
 
         starterData.concept(TinkarTerm.SOLOR_MODULE)
                 .fullyQualifiedName("SOLOR module (SOLOR)", TinkarTerm.PREFERRED)
@@ -3009,7 +3004,6 @@ public class TinkarStarterData {
                 .tinkarBaseModelMembership()
                 .build();
 
-
         starterData.concept(TinkarTerm.FEATURE)
                 .fullyQualifiedName("Feature (SOLOR)", TinkarTerm.PREFERRED)
                 .synonym("Feature", TinkarTerm.PREFERRED)
@@ -3019,7 +3013,6 @@ public class TinkarStarterData {
                 .statedDefinition(List.of(TinkarTerm.DESCRIPTION_TYPE))
                 .tinkarBaseModelMembership()
                 .build();
-
 
         //Create Description Pattern
         starterData.pattern(TinkarTerm.DESCRIPTION_PATTERN)
@@ -3092,7 +3085,6 @@ public class TinkarStarterData {
                         TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .tinkarBaseModelMembership()
                 .build();
-
 
         starterData.concept(TinkarTerm.INFERRED_NAVIGATION)
                 .fullyQualifiedName("Inferred navigation (SOLOR)", TinkarTerm.PREFERRED)
