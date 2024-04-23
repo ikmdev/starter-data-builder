@@ -453,72 +453,72 @@ public class SnomedLoincLidrStarterData {
 
         fullyQualifiedNameToConceptMap.put("Specimen", lidrSpecimenConcept);
 
-        //In SNOMED-LOINC now: 371439000 |Specimen type (observable entity)| will be the source for below as per spreadsheet LIDRStarterData:
-        //Specimen Type
-        EntityProxy.Concept snomedSpecimenConcept = EntityProxy.Concept.make("Specimen Type", UuidUtil.fromSNOMED("371439000"));
-        starterData.concept(snomedSpecimenConcept)
-                .fullyQualifiedName("Specimen Type", TinkarTerm.PREFERRED)
-                .synonym("Specimen type (SNOMED CT®) at minimum",TinkarTerm.DESCRIPTION_TYPE)
-                .definition("\"From HL7: This field describes the precise nature of the entity that will be the source material for the observation.\n" +
-                        "This entry describes the specimen type, i.e. the \"\"what\"\" is being submitted\n", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedSpecimenConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of(lidrSpecimenConcept,snomedSpecimenConcept))
-                .statedNavigation( List.of(snomedSpecimenConcept) ,List.of( lidrSpecimenConcept))
-                .build();
-
-        //Specimen Type Modifier
-        EntityProxy.Concept specimenTypeModConcept = EntityProxy.Concept.make("Specimen Type Modifier", uuidUtility.createUUID("Specimen Type Modifier"));
-        starterData.concept(specimenTypeModConcept)
-                .fullyQualifiedName("Specimen Type Modifier", TinkarTerm.PREFERRED)
-                .definition("A modifying or qualifying description(s) about the specimen type", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenTypeModConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of( lidrSpecimenConcept,specimenTypeModConcept))
-                .statedNavigation( List.of(specimenTypeModConcept) ,List.of( lidrSpecimenConcept))
-                .build();
-
-        //Specimen Source Site
-        EntityProxy.Concept specimenSourceSiteConcept = EntityProxy.Concept.make("Specimen Source Site", uuidUtility.createUUID("Specimen Source Site"));
-        starterData.concept(specimenSourceSiteConcept)
-                .fullyQualifiedName("Specimen Source Site", TinkarTerm.PREFERRED)
-                .synonym("Specimen source site (SNOMED CT®)", TinkarTerm.PREFERRED)
-                .definition("The source from which the specimen was obtained and describes where the specimen came from, i.e. the \"\"where\"\"", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenSourceSiteConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of( lidrSpecimenConcept,specimenSourceSiteConcept))
-                .statedNavigation( List.of(specimenSourceSiteConcept) ,List.of(lidrSpecimenConcept))
-                .build();
-
-        //Specimen Collection Method  -  This is wrong SNOMED LOINC has Method I think?
-        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Specimen Collection Method".getBytes()));
-        EntityProxy.Concept specimenCollectionMethodConcept = EntityProxy.Concept.make(publicId);
-        starterData.concept(specimenCollectionMethodConcept)
-                .fullyQualifiedName("Specimen Collection Method", TinkarTerm.PREFERRED)
-                .synonym("Specimen collection method (SNOMED CT®)", TinkarTerm.PREFERRED)
-                .definition("The procedure or process by which the specimen was collected.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenCollectionMethodConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of( lidrSpecimenConcept,specimenCollectionMethodConcept))
-                .statedNavigation( List.of(specimenCollectionMethodConcept) ,List.of( lidrSpecimenConcept))
-                .build();
-
-        //Specimen Additives
-        EntityProxy.Concept specimenAdditivesConcept = EntityProxy.Concept.make("Specimen Additives", uuidUtility.createUUID("Specimen Additives"));
-        starterData.concept(specimenAdditivesConcept)
-                .fullyQualifiedName("Specimen Additives", TinkarTerm.PREFERRED)
-                .synonym("Specimen additives (SNOMED CT®)", TinkarTerm.PREFERRED)
-                .definition("Specifies the actual additives used during the preparation of the specimen when performing the test.", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenAdditivesConcept.asUuidArray()[0].toString())
-                .statedDefinition(List.of( lidrSpecimenConcept,specimenAdditivesConcept))
-                .statedNavigation( List.of(specimenAdditivesConcept) ,List.of( lidrSpecimenConcept))
-                .build();
-
-        List<EntityProxy.Concept> specimenConcepts = List.of(
-                lidrSpecimenConcept,  // These parent concepts need to be here to see desired hierarchy
-                snomedSpecimenConcept,specimenAdditivesConcept,
-                specimenSourceSiteConcept,specimenCollectionMethodConcept,
-                specimenTypeModConcept );
-
-        starterData.concept(lidrSpecimenConcept)
-                .statedNavigation(specimenConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
+//        //In SNOMED-LOINC now: 371439000 |Specimen type (observable entity)| will be the source for below as per spreadsheet LIDRStarterData:
+//        //Specimen Type
+//        EntityProxy.Concept snomedSpecimenConcept = EntityProxy.Concept.make("Specimen Type", UuidUtil.fromSNOMED("371439000"));
+//        starterData.concept(snomedSpecimenConcept)
+//                .fullyQualifiedName("Specimen Type", TinkarTerm.PREFERRED)
+//                .synonym("Specimen type (SNOMED CT®) at minimum",TinkarTerm.DESCRIPTION_TYPE)
+//                .definition("\"From HL7: This field describes the precise nature of the entity that will be the source material for the observation.\n" +
+//                        "This entry describes the specimen type, i.e. the \"\"what\"\" is being submitted\n", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedSpecimenConcept.asUuidArray()[0].toString())
+//                .statedDefinition(List.of(lidrSpecimenConcept,snomedSpecimenConcept))
+//                .statedNavigation( List.of(snomedSpecimenConcept) ,List.of( lidrSpecimenConcept))
+//                .build();
+//
+//        //Specimen Type Modifier
+//        EntityProxy.Concept specimenTypeModConcept = EntityProxy.Concept.make("Specimen Type Modifier", uuidUtility.createUUID("Specimen Type Modifier"));
+//        starterData.concept(specimenTypeModConcept)
+//                .fullyQualifiedName("Specimen Type Modifier", TinkarTerm.PREFERRED)
+//                .definition("A modifying or qualifying description(s) about the specimen type", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenTypeModConcept.asUuidArray()[0].toString())
+//                .statedDefinition(List.of( lidrSpecimenConcept,specimenTypeModConcept))
+//                .statedNavigation( List.of(specimenTypeModConcept) ,List.of( lidrSpecimenConcept))
+//                .build();
+//
+//        //Specimen Source Site
+//        EntityProxy.Concept specimenSourceSiteConcept = EntityProxy.Concept.make("Specimen Source Site", uuidUtility.createUUID("Specimen Source Site"));
+//        starterData.concept(specimenSourceSiteConcept)
+//                .fullyQualifiedName("Specimen Source Site", TinkarTerm.PREFERRED)
+//                .synonym("Specimen source site (SNOMED CT®)", TinkarTerm.PREFERRED)
+//                .definition("The source from which the specimen was obtained and describes where the specimen came from, i.e. the \"\"where\"\"", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenSourceSiteConcept.asUuidArray()[0].toString())
+//                .statedDefinition(List.of( lidrSpecimenConcept,specimenSourceSiteConcept))
+//                .statedNavigation( List.of(specimenSourceSiteConcept) ,List.of(lidrSpecimenConcept))
+//                .build();
+//
+//        //Specimen Collection Method  -  This is wrong SNOMED LOINC has Method I think?
+//        publicId = PublicIds.of(UUID.nameUUIDFromBytes("Specimen Collection Method".getBytes()));
+//        EntityProxy.Concept specimenCollectionMethodConcept = EntityProxy.Concept.make(publicId);
+//        starterData.concept(specimenCollectionMethodConcept)
+//                .fullyQualifiedName("Specimen Collection Method", TinkarTerm.PREFERRED)
+//                .synonym("Specimen collection method (SNOMED CT®)", TinkarTerm.PREFERRED)
+//                .definition("The procedure or process by which the specimen was collected.", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenCollectionMethodConcept.asUuidArray()[0].toString())
+//                .statedDefinition(List.of( lidrSpecimenConcept,specimenCollectionMethodConcept))
+//                .statedNavigation( List.of(specimenCollectionMethodConcept) ,List.of( lidrSpecimenConcept))
+//                .build();
+//
+//        //Specimen Additives
+//        EntityProxy.Concept specimenAdditivesConcept = EntityProxy.Concept.make("Specimen Additives", uuidUtility.createUUID("Specimen Additives"));
+//        starterData.concept(specimenAdditivesConcept)
+//                .fullyQualifiedName("Specimen Additives", TinkarTerm.PREFERRED)
+//                .synonym("Specimen additives (SNOMED CT®)", TinkarTerm.PREFERRED)
+//                .definition("Specifies the actual additives used during the preparation of the specimen when performing the test.", TinkarTerm.PREFERRED)
+//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, specimenAdditivesConcept.asUuidArray()[0].toString())
+//                .statedDefinition(List.of( lidrSpecimenConcept,specimenAdditivesConcept))
+//                .statedNavigation( List.of(specimenAdditivesConcept) ,List.of( lidrSpecimenConcept))
+//                .build();
+//
+//        List<EntityProxy.Concept> specimenConcepts = List.of(
+//                lidrSpecimenConcept,  // These parent concepts need to be here to see desired hierarchy
+//                snomedSpecimenConcept,specimenAdditivesConcept,
+//                specimenSourceSiteConcept,specimenCollectionMethodConcept,
+//                specimenTypeModConcept );
+//
+//        starterData.concept(lidrSpecimenConcept)
+//                .statedNavigation(specimenConcepts,List.of(TinkarTerm.MODEL_CONCEPT))
+//                .build();
 
     }
 
@@ -883,13 +883,17 @@ public class SnomedLoincLidrStarterData {
                         TinkarTerm.IDENTIFIER_SOURCE,
                         TinkarTerm.COMPONENT_FIELD)
                 .fieldDefinition(
+                        fullyQualifiedNameToConceptMap.get("Target"),
+                        TinkarTerm.IDENTIFIER_SOURCE,
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
+                .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Specimen"),
                         TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .fieldDefinition(
                         fullyQualifiedNameToConceptMap.get("Result Conformance"),
                         TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .build();
 
     }
