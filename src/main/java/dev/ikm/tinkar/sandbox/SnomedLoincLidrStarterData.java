@@ -319,16 +319,6 @@ public class SnomedLoincLidrStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        publicId = PublicIds.of(UUID.nameUUIDFromBytes("LIDR Records".getBytes()));
-        EntityProxy.Concept lidrRecords = EntityProxy.Concept.make(publicId);
-        starterData.concept(lidrRecords)
-                .fullyQualifiedName("LIDR Records", TinkarTerm.PREFERRED)
-                .synonym("LIDR Records", TinkarTerm.PREFERRED)
-                .definition("A model concept to hold LIDR records", TinkarTerm.PREFERRED)
-                .identifier(TinkarTerm.MODEL_CONCEPT, lidrRecords.asUuidArray()[0].toString())
-                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
-                .build();
-
 
         /* UUID from SNOMED Browser - This is the ECL query : '43222004 |Test kit method (procedure)|'  */
         // Maybe take this out since it is not just plain "Test kit".
