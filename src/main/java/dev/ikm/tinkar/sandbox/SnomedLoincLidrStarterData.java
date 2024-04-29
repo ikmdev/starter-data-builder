@@ -225,7 +225,7 @@ public class SnomedLoincLidrStarterData {
                 .fieldDefinition(
                         allowedResultSetIdentifier,
                         TinkarTerm.IDENTIFIER_SOURCE,
-                        TinkarTerm.COMPONENT_FIELD)
+                        TinkarTerm.COMPONENT_ID_SET_FIELD)
                 .build();
 
         publicId = PublicIds.of(UUID.nameUUIDFromBytes("Allowed Result".getBytes()));
