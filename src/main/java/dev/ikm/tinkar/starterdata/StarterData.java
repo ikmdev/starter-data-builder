@@ -172,7 +172,6 @@ public class StarterData {
             return this;
         }
 
-
         public ConceptBuilder statedDefinition(List<EntityProxy.Concept> originConceptList){
             builderEntities.add(semanticUtility.createStatedDefinitionSemantic(conceptNid, originConceptList, authoringSTAMP));
             return this;
@@ -272,7 +271,6 @@ public class StarterData {
             );
             return this;
         }
-
 
         public EntityProxy.Pattern build(){
             assert patternProxy.description() != null;

@@ -36,7 +36,7 @@ public class SnomedStarterData {
         starterData.shutdown();
     }
 
-    private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
+    protected static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
         Concept snomedAuthor = EntityProxy.Concept.make("IHTSDO SNOMED CT Author", uuidUtility.createUUID("IHTSDO SNOMED CT Author"));
         starterData.concept(snomedAuthor)
                 .fullyQualifiedName("IHTSDO SNOMED CT Author", TinkarTerm.PREFERRED)
