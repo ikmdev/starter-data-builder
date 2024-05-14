@@ -679,7 +679,27 @@ public class SnomedLoincLidrStarterData {
                 .build();
 
         //Units from SNOMED-LOINC :  From SNOMED-LOINC : 246514001 |Units (attribute)|
-        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UuidUtil.fromSNOMED("246514001"));
+       // EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("AU/mL", UuidUtil.fromString("AU/mL"));
+
+        EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Example Units", new UUIDUtility().createUUID("Example Units"));
+        starterData.concept(loincUnitsType)
+                .fullyQualifiedName("Example Units", TinkarTerm.PREFERRED)
+                .synonym("Example Units", TinkarTerm.PREFERRED)
+                .definition("LOINC Example Units", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, loincUnitsType.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
+                .statedNavigation(List.of(loincUnitsType),List.of(TinkarTerm.MODEL_CONCEPT))
+                .build();
+
+        EntityProxy.Concept auMLconcept = EntityProxy.Concept.make("AU/mL", new UUIDUtility().createUUID("AU/mL"));
+        starterData.concept(auMLconcept)
+                .fullyQualifiedName("AU/mL", TinkarTerm.PREFERRED)
+                .synonym("AU/mL", TinkarTerm.PREFERRED)
+                .definition("Atomic Units per milliliter", TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, auMLconcept.asUuidArray()[0].toString())
+                .statedDefinition(List.of(loincUnitsType))
+                .statedNavigation(List.of(auMLconcept),List.of(loincUnitsType))
+                .build();
 
         EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", new UUIDUtility().createUUID("LIDR Reference Ranges"));
         starterData.concept(referenceRanges)
