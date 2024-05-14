@@ -691,10 +691,10 @@ public class SnomedLoincLidrStarterData {
                 .statedNavigation(List.of(loincUnitsType),List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-        EntityProxy.Concept auMLconcept = EntityProxy.Concept.make("AU/mL", new UUIDUtility().createUUID("AU/mL"));
+        EntityProxy.Concept auMLconcept = EntityProxy.Concept.make("AU per mL", new UUIDUtility().createUUID("AU per mL"));
         starterData.concept(auMLconcept)
-                .fullyQualifiedName("AU/mL", TinkarTerm.PREFERRED)
-                .synonym("AU/mL", TinkarTerm.PREFERRED)
+                .fullyQualifiedName("AU per mL", TinkarTerm.PREFERRED)
+                .synonym("AU per mL", TinkarTerm.PREFERRED)
                 .definition("Atomic Units per milliliter", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, auMLconcept.asUuidArray()[0].toString())
                 .statedDefinition(List.of(loincUnitsType))
