@@ -749,7 +749,14 @@ public class SnomedLoincLidrStarterData {
 
         //Units from SNOMED-LOINC :  From SNOMED-LOINC : 246514001 |Units (attribute)|
         EntityProxy.Concept loincUnitsType = EntityProxy.Concept.make("Units", UuidUtil.fromSNOMED("246514001"));
-        starterData.concept(loincUnitsType).build();
+        starterData.concept(loincUnitsType)
+                .fullyQualifiedName("Units",TinkarTerm.PREFERRED)
+                .synonym("Units of Measure",TinkarTerm.PREFERRED)
+                .definition("Provides expected UCUM (Unified Code for Units of Measure) units of measure for  values of an observation",TinkarTerm.PREFERRED)
+                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER,loincUnitsType.asUuidArray()[0].toString())
+                .statedDefinition(List.of(TinkarTerm.PHENOMENON))
+                .statedNavigation(List.of(loincUnitsType),List.of(TinkarTerm.PHENOMENON))
+                .build();
 
         EntityProxy.Concept referenceRanges = EntityProxy.Concept.make("Reference Ranges", new UUIDUtility().createUUID("LIDR Reference Ranges"));
         starterData.concept(referenceRanges)
