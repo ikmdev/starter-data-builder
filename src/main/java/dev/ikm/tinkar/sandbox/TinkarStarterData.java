@@ -67,6 +67,10 @@ public class TinkarStarterData {
         tinkarStarterData.importStarterData(); //load pb.zip into database
     }
 
+    public TinkarStarterData(File exportDataStore) {
+        this(exportDataStore, null, null);
+    }
+
     public TinkarStarterData(File exportDataStore, File exportFile, File importDataStore) {
         this.exportDataStore = exportDataStore;
         this.exportFile = exportFile;
