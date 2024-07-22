@@ -28,22 +28,25 @@ public class TinkarStarterData {
 
     private static final Logger LOG = LoggerFactory.getLogger(TinkarStarterData.class.getSimpleName());
 
-    private static File exportDataStore;
-    private static File importDataStore;
-    private static File exportFile;
+    private File exportDataStore;
+    private File importDataStore;
+    private File exportFile;
 
     private static Entity<? extends EntityVersion> authoringSTAMP;
 
     public static void main(String[] args){
-        exportDataStore = new File(args[0]);
-        exportFile = new File(args[1]);
-        importDataStore = new File(args[2]);
-        FileUtil.recursiveDelete(exportDataStore);
-        FileUtil.recursiveDelete(importDataStore);
+        TinkarStarterData tinkarStarterData = new TinkarStarterData(new File(args[0]), new File(args[1]),  new File(args[2]));
+
+        if(tinkarStarterData.exportDataStore.exists()){
+            FileUtil.recursiveDelete(tinkarStarterData.exportDataStore);
+        }
+        if(tinkarStarterData.importDataStore.exists()){
+            FileUtil.recursiveDelete(tinkarStarterData.importDataStore);
+        }
         UUIDUtility uuidUtility = new UUIDUtility();
 
         //Build, export, and shutdown database
-        StarterData starterData = new StarterData(exportDataStore, uuidUtility)
+        StarterData starterData = new StarterData(tinkarStarterData.exportDataStore, uuidUtility)
                 .init()
                 .authoringSTAMP(
                         TinkarTerm.ACTIVE_STATE,
@@ -57,11 +60,38 @@ public class TinkarStarterData {
         configureConceptsAndPatterns(starterData, uuidUtility);
         starterData.build(); //Natively writing data to spined array
         transformAnalysis(uuidUtility); //Isolate and inspect import and export transforms
-        exportStarterData();  //exports starter data to pb.zip
+        tinkarStarterData.exportStarterData();  //exports starter data to pb.zip
         starterData.shutdown();
 
         //Load exported starter data into clean database
-        importStarterData(); //load pb.zip into database
+        tinkarStarterData.importStarterData(); //load pb.zip into database
+    }
+
+    public TinkarStarterData(File exportDataStore) {
+        this(exportDataStore, null, null);
+    }
+
+    public TinkarStarterData(File exportDataStore, File exportFile, File importDataStore) {
+        this.exportDataStore = exportDataStore;
+        this.exportFile = exportFile;
+        this.importDataStore = importDataStore;
+    }
+    public void generateTinkarStarterData(){
+        UUIDUtility uuidUtility = new UUIDUtility();
+        StarterData starterData = new StarterData(exportDataStore, uuidUtility)
+                .authoringSTAMP(
+                        TinkarTerm.ACTIVE_STATE,
+                        PrimitiveData.PREMUNDANE_TIME,
+                        TinkarTerm.USER,
+                        TinkarTerm.PRIMORDIAL_MODULE,
+                        TinkarTerm.PRIMORDIAL_PATH);
+
+        authoringSTAMP = starterData.getAuthoringSTAMP();
+
+        configureConceptsAndPatterns(starterData, uuidUtility);
+        starterData.build(); //Natively writing data to spined array
+        transformAnalysis(uuidUtility); //Isolate and inspect import and export transforms
+
     }
 
     private static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
@@ -3262,7 +3292,7 @@ public class TinkarStarterData {
                 .build();
     }
 
-    private static void exportStarterData(){
+    private void exportStarterData(){
         ExportEntitiesController exportEntitiesController = new ExportEntitiesController();
         try {
             exportEntitiesController.export(exportFile).get();
@@ -3271,7 +3301,7 @@ public class TinkarStarterData {
         }
     }
 
-    private static void importStarterData() {
+    private void importStarterData() {
         LOG.info("Starting database");
         LOG.info("Loading data from " + importDataStore.getAbsolutePath());
         CachingService.clearAll();
