@@ -46,19 +46,6 @@ public class Sept2024ConnectathonStarterData {
     }
 
     protected static void configureConceptsAndPatterns(StarterData starterData, UUIDUtility uuidUtility){
-//        Concept snomedAuthor = Concept.make("IHTSDO SNOMED CT Author", uuidUtility.createUUID("IHTSDO SNOMED CT Author"));
-//        starterData.concept(snomedAuthor)
-//                .fullyQualifiedName("IHTSDO SNOMED CT Author", TinkarTerm.PREFERRED)
-//                .synonym("SNOMED CT Author", TinkarTerm.PREFERRED)
-//                .definition("International Health Terminology Standards Development Organisation (IHTSDO) SNOMED CT Author", TinkarTerm.PREFERRED)
-//                .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, snomedAuthor.asUuidArray()[0].toString())
-//                .statedDefinition(List.of(TinkarTerm.USER))
-//                .build();
-//
-//        Concept snomedIdentifier = Concept.make("SNOMED CT Identifier", UuidUtil.fromSNOMED("900000000000294009"));
-//        starterData.concept(snomedIdentifier)
-//                .statedDefinition(List.of(TinkarTerm.IDENTIFIER_SOURCE))
-//                .build();
 
         Concept performance = Concept.make("Performance", UUID.fromString("395cc864-7c51-4072-b3e7-f9195b40053a"));
         starterData.concept(performance)
@@ -68,11 +55,9 @@ public class Sept2024ConnectathonStarterData {
                 .statedDefinition(List.of(TinkarTerm.MODEL_CONCEPT))
                 .build();
 
-
         configureConnectathonPatterns( starterData,  uuidUtility);
 
         configureValueContraintSemantics(starterData,uuidUtility);
-
     }
 
     protected static void configureValueContraintSemantics(StarterData starterData, UUIDUtility uuidUtility){
@@ -139,8 +124,6 @@ public class Sept2024ConnectathonStarterData {
         classPatternFields.add(referenceRangeMaximum);
         classPatternFields.add(exampleUUCM);
 
-
-
         //UUIDUtility uuidUtility = new UUIDUtility();
         //PublicId patternPublicId = PublicIds.of(uuidUtility.createUUID("Value Constraint Pattern"));
         int patternNid = EntityService.get().nidForPublicId(TinkarTerm.VALUE_CONSTRAINT_PATTERN);
@@ -154,7 +137,6 @@ public class Sept2024ConnectathonStarterData {
         writeSemantic(semanticNid, primordialUUID, patternNid, referencedComponentNid, stampNid, classPatternFields);
     }
 
-
     protected static void configureConnectathonPatterns(StarterData starterData, UUIDUtility uuidUtility){
 
         createPresenceOfCovidPattern(starterData, uuidUtility);
@@ -164,8 +146,6 @@ public class Sept2024ConnectathonStarterData {
         createUndeterminedCovidTestResultPattern(starterData, uuidUtility);
 
         createInvalidCovidTestResultPattern(starterData, uuidUtility);
-
-
     }
 
     private static void createInvalidCovidTestResultPattern(StarterData starterData, UUIDUtility uuidUtility) {
@@ -218,8 +198,6 @@ public class Sept2024ConnectathonStarterData {
                 .synonym("Not Detected", TinkarTerm.PREFERRED)
                 .identifier(TinkarTerm.UNIVERSALLY_UNIQUE_IDENTIFIER, notDetected.asUuidArray()[0].toString())
                 .build();
-
-
 
         String pattern = "Absence Of Covid Pattern";
         starterData.pattern( EntityProxy.Pattern.make(pattern , uuidUtility.createUUID(pattern)))
@@ -285,6 +263,7 @@ public class Sept2024ConnectathonStarterData {
             e.printStackTrace();
         }
     }
+
     private static void addConceptToSemanticPatterns(EntityProxy.Concept concept, String semanticPattern, StarterData starterData) {
 
         MutableList<Object> classPatternFields = Lists.mutable.empty();
@@ -300,8 +279,8 @@ public class Sept2024ConnectathonStarterData {
         int stampNid = EntityService.get().nidForPublicId(starterData.getAuthoringSTAMP());
 
         writeSemantic(semanticNid, primordialUUID, patternNid, referencedComponentNid, stampNid, classPatternFields);
-
     }
+
     private static void writeSemantic(int semanticNid, UUID primordialUUID, int patternNid, int referencedComponentNid, int stampNid, MutableList<Object> lidrRecordFields) {
         /************
          * Below: Creates the semantic with one version and write it to the database
@@ -334,6 +313,6 @@ public class Sept2024ConnectathonStarterData {
                 .builder(semanticRecord)
                 .versions(versions.toImmutable()).build();
         EntityService.get().putEntity(semanticEntity);
-
     }
+
 }
