@@ -14,7 +14,6 @@ jobs:
   build-job:
     name: Build Job
     runs-on: ubuntu-24.04
-    if: github.repository_owner == 'ikmdev'
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -23,7 +22,6 @@ jobs:
       - name: Build IKMDEV Code
         uses: ikmdev/maven-clean-install-build-action@main
         with:
-          branch_name: ${{env.BRANCH_NAME}}
           branch_name: ${{env.BRANCH_NAME}}
           sonarcloud_token: ${{ secrets.SONAR_TOKEN }}
           sonarcloud_host_url: ${{ 'https://sonarcloud.io/' }}
