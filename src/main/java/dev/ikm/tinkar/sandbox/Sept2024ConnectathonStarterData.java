@@ -63,8 +63,7 @@ public class Sept2024ConnectathonStarterData {
                         TinkarTerm.PRIMORDIAL_MODULE,
                         TinkarTerm.PRIMORDIAL_PATH);
 
-        session = composer.open(State.ACTIVE, System.currentTimeMillis(),
-                TinkarTerm.USER, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.PRIMORDIAL_PATH);
+        session = composer.open(State.ACTIVE, TinkarTerm.USER, TinkarTerm.PRIMORDIAL_MODULE, TinkarTerm.PRIMORDIAL_PATH);
 
         createComposerConcepts();
         configureConceptsAndPatterns();
