@@ -14,7 +14,6 @@ open module tinkar.sandbox {
     requires org.slf4j;
     requires org.eclipse.collections;
     requires dev.ikm.tinkar.composer;
-
     exports dev.ikm.tinkar.starterdata;
 
 }
